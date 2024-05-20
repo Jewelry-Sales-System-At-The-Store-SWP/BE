@@ -56,7 +56,7 @@ public partial class JssatsContext : DbContext
             .AddJsonFile("appsettings.json", true, true)
             .Build();
         //return config["ConnectionStrings:DBConnect"];
-        var strConn = config["ConnectionStrings:StockDB"];
+        var strConn = config["ConnectionStrings:JSSATS"];
         return strConn ?? "";
     }
 
