@@ -27,9 +27,9 @@ namespace API.Controllers
             return Ok(result);
         }
         [HttpPut]
-        public async Task<IActionResult> UpdateCustomer(Customer customer)
+        public async Task<IActionResult> UpdateCustomer([FromQuery]int id, Customer customer)
         {
-            var result = await CustomerService.UpdateCustomer(customer);
+            var result = await CustomerService.UpdateCustomer(id ,customer);
             return Ok(result);
         }
         [HttpDelete("{id}")]

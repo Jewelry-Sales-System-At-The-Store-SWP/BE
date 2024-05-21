@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Repositories.Interface
+﻿namespace Repositories.Interface
 {
     public interface IRepository<T>
     {
@@ -12,6 +6,6 @@ namespace Repositories.Interface
         Task<T?> GetById(int id);
         Task<int> Create(T entity);
         Task<IEnumerable<T>> Find(Func<T, bool> predicate);
-        Task<int> Update(T entity);
+        Task<int> Update(int id, T entity);
     }
 }

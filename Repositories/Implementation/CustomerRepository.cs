@@ -26,9 +26,9 @@ namespace Repositories.Implementation
             return await CustomerDAO.Instance.GetCustomerById(id);
         }
 
-        public Task<int> Update(Customer entity)
+        public Task<int> Update(int id, Customer entity)
         {
-            return CustomerDAO.Instance.UpdateCustomer(entity);
+            return CustomerDAO.Instance.UpdateCustomer(id, entity);
         }
     }
 }

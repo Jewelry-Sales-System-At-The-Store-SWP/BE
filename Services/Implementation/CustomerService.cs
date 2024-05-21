@@ -28,9 +28,9 @@ namespace Services.Implementation
             return await CustomerRepository.GetAll();
         }
 
-        public async Task<int> UpdateCustomer(Customer customer)
+        public async Task<int> UpdateCustomer(int id, Customer customer)
         {
-            return await CustomerRepository.Update(customer);
+            return await CustomerRepository.Update(id, customer);
         }
     }
 }

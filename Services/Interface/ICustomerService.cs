@@ -12,7 +12,7 @@ namespace Services.Interface
         public Task<IEnumerable<Customer?>?> GetCustomers();
         public Task<Customer?> GetCustomerById(int id);
         public Task<int> CreateCustomer(Customer customer);
-        public Task<int> UpdateCustomer(Customer customer);
+        public Task<int> UpdateCustomer(int id,Customer customer);
         public Task<int> DeleteCustomer(int id);
     }
 }

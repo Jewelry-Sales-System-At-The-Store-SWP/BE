@@ -4,6 +4,6 @@
     {
         public string? Description { get; set; }
 
-        public DateOnly? EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
     }
 }

@@ -36,19 +36,15 @@ namespace DAO
             _context.Warranties.Add(warranty);
             return await _context.SaveChangesAsync();
         }
-        public async Task<int> UpdateWarranty(Warranty warranty)
+        public async Task<int> UpdateWarranty(int id, Warranty warranty)
         {
             var existingWarranty = await _context.Warranties
-                .AsNoTracking()
-                .FirstOrDefaultAsync(w => w.WarrantyId == warranty.WarrantyId);
-            if (existingWarranty == null)
-            {
-                _context.Warranties.Add(warranty);
-            }
-            else
-            {
-                _context.Entry(warranty).State = EntityState.Modified;
-            }
+                .FirstOrDefaultAsync(w => w.WarrantyId == id);
+            warranty.WarrantyId = id;
+            if (existingWarranty == null) return 0;
+            _context.Entry(existingWarranty).CurrentValues.SetValues(warranty);
+            _context.Entry(existingWarranty).State = EntityState.Modified;
+
             return await _context.SaveChangesAsync();
         }
         public async Task<int> DeleteWarranty(int id)

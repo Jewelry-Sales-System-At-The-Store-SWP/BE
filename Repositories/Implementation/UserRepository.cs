@@ -26,7 +26,7 @@ namespace Repositories.Implementation
             return await UserDAO.Instance.GetUserById(id);
         }
 
-        public Task<int> Update(User entity)
+        public Task<int> Update(int id, User entity)
         {
             throw new NotImplementedException();
         }

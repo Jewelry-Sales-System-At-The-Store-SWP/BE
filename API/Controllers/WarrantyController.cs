@@ -28,7 +28,6 @@ namespace API.Controllers
             return Ok(warranty);
         }
         [HttpPost]
-        [Obsolete]
         public async Task<IActionResult> CreateWarranty(WarrantyDTO warrantyDTO)
         {
             var warrantyEntity = mapper.Map<Warranty>(warrantyDTO);
@@ -36,11 +35,10 @@ namespace API.Controllers
             return Ok(result);
         }
         [HttpPut]
-        [Obsolete]
-        public async Task<IActionResult> UpdateWarranty(WarrantyDTO warrantyDTO)
+        public async Task<IActionResult> UpdateWarranty([FromQuery]int id,WarrantyDTO warrantyDTO)
         {
             var warrantyEntity = mapper.Map<Warranty>(warrantyDTO);
-            var result = await WarrantyService.UpdateWarranty(warrantyEntity);
+            var result = await WarrantyService.UpdateWarranty(id ,warrantyEntity);
             return Ok(result);
         }
     }

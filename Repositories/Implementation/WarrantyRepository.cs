@@ -1,11 +1,6 @@
 ﻿using BusinessObjects.Models;
 using DAO;
 using Repositories.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repositories.Implementation
 {
@@ -31,9 +26,9 @@ namespace Repositories.Implementation
             return await WarrantyDAO.Instance.GetWarrantyById(id);
         }
 
-        public Task<int> Update(Warranty entity)
+        public async Task<int> Update(int id, Warranty entity)
         {
-            throw new NotImplementedException();
+            return await WarrantyDAO.Instance.UpdateWarranty(id, entity);
         }
     }
 }

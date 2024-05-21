@@ -1,10 +1,5 @@
 ﻿using BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAO
 {
@@ -39,19 +34,14 @@ namespace DAO
             _context.Customers.Add(customer);
             return await _context.SaveChangesAsync();
         }
-        public async Task<int> UpdateCustomer(Customer customer)
+        public async Task<int> UpdateCustomer(int id,Customer customer)
         {
+            // Find the existing customer based on the provided ID
             var existingCustomer = await _context.Customers
-                .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.CustomerId == customer.CustomerId);
-            if (existingCustomer == null)
-            {
-                _context.Customers.Add(customer);
-            }
-            else
-            {
-                _context.Entry(customer).State = EntityState.Modified;
-            }
+                .FirstOrDefaultAsync(c => c.CustomerId == id);
+            if (existingCustomer == null) return 0;
+            _context.Entry(existingCustomer).CurrentValues.SetValues(customer);
+            _context.Entry(existingCustomer).State = EntityState.Modified;
             return await _context.SaveChangesAsync();
         }
         public async Task<int> DeleteCustomer(int id)

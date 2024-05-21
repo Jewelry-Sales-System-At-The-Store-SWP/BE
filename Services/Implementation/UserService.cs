@@ -11,10 +11,10 @@ namespace Services.Implementation
 
         public async Task<User?> Login(LoginDTO loginDTO)
         {
-            return await UserRepository.GetUser(loginDTO.Email, loginDTO.Password);
+            return await UserRepository.GetUser(loginDTO.Email ?? "", loginDTO.Password ?? "");
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<User?>?> GetUsers()
         {
             return await UserRepository.GetAll();
         }
