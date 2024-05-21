@@ -1,4 +1,6 @@
 ﻿
+using AutoMapper;
+using BusinessObjects.DTO;
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -11,9 +13,11 @@ namespace API.Controllers
     public class JewelryController : ControllerBase
     {
         private readonly IJewelryService _jewelryService;
-        public JewelryController(IJewelryService jewelryService)
+        private readonly IMapper _mapper;
+        public JewelryController(IJewelryService jewelryService, IMapper mapper)
         {
             _jewelryService = jewelryService;
+            _mapper = mapper;
         }
         [HttpGet]
         public async Task<IActionResult> GetJewelries()
@@ -28,9 +32,10 @@ namespace API.Controllers
             return Ok(jewelry);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateJewelry(Jewelry jewelry)
+        public async Task<IActionResult> CreateJewelry(JewelryDTO jewelryDTO)
         {
-            var result = await _jewelryService.CreateJewelry(jewelry);
+            var jewelyEntity = _mapper.Map<Jewelry>(jewelryDTO);
+            var result = await _jewelryService.CreateJewelry(jewelyEntity);
             return Ok(result);
         }
         [HttpPut]
