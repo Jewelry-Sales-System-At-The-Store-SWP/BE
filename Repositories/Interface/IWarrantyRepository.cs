@@ -1,9 +1,8 @@
 ﻿using BusinessObjects.Models;
 using Repositories.Interface.GenericRepository;
+namespace Repositories.Interface;
 
-namespace Repositories.Interface
+public interface IWarrantyRepository : IReadRepository<Warranty>, ICreateRepository<Warranty>, IUpdateRepository<Warranty>
 {
-    public interface IWarrantyRepository : IRepository<Warranty>
-    {
-    }
+
 }
