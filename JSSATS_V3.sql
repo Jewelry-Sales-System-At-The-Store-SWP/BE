@@ -33,7 +33,7 @@ CREATE TABLE [Jewelry] (
   [BasePrice] float,
   [Weight] FLOAT,
   [LaborCost] float,
-  [StoneCost] float
+  [StoneCost] float,
   [IsSold] bit
 )
 

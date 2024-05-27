@@ -1,9 +1,8 @@
 ﻿using BusinessObjects.Models;
 using Repositories.Interface.GenericRepository;
 
-namespace Repositories.Interface
+namespace Repositories.Interface;
+
+public interface ICustomerRepository : IReadRepository<Customer>, ICreateRepository<Customer>, IUpdateRepository<Customer>
 {
-    public interface ICustomerRepository : IReadRepository<Customer>, ICreateRepository<Customer>, IUpdateRepository<Customer>
-    {
-    }
 }
