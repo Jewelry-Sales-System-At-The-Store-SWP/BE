@@ -26,7 +26,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
 });
-
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 var app = builder.Build();
 
 # region Swagger
@@ -41,7 +49,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 # endregion
-
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
