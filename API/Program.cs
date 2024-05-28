@@ -22,27 +22,28 @@ builder.Services.AddScoped<IBillRepository, BillRepository>();
 builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddScoped<IPromotionRepository, PromotionRepository>();
 
-
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "JSSATS", Version = "v1" });
-}); 
+builder.Services.AddSwaggerGen(c => {
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
+});
+
 var app = builder.Build();
 
-#region Swagger
-app.UseSwagger(options => { options.RouteTemplate = "{documentName}/swagger.json"; });
-app.UseSwaggerUI(c =>
+# region Swagger
+if (app.Environment.IsDevelopment())
 {
-    c.SwaggerEndpoint("/v1/swagger.json", "JSSATS-API-V1");
-    c.InjectStylesheet("/swagger-ui/SwaggerDark.css");
-    c.RoutePrefix = string.Empty;
-});
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "JSSATS-API-V1");
+        c.InjectStylesheet("/swagger-ui/SwaggerDark.css");
+        c.RoutePrefix = string.Empty;
+    });
+}
 # endregion
+
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseStaticFiles();
-
 app.MapControllers();
-
 app.Run();
