@@ -46,7 +46,7 @@ namespace API.Controllers
                                 City = city,
                                 BuyPrice = decimal.Parse(buyPrice),
                                 SellPrice = decimal.Parse(sellPrice),
-                                Type = type
+                                Type = type,
                             });
                         }
                     }
