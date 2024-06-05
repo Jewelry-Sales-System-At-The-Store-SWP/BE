@@ -17,11 +17,12 @@ namespace DAO
         {
             return await _context.Warranties
                                  .Include(w => w.Jewelries)
+                                    .ThenInclude(jt => jt.JewelryType)
                                  .ToListAsync();
         }
         public async Task<Warranty?> GetWarrantyById(int? id)
         {
-            return await _context.Warranties.FindAsync(id);
+            return await _context.Warranties.Include(w => w.Jewelries).FirstOrDefaultAsync(w=>w.WarrantyId == id);
         }
         public async Task<int> CreateWarranty(Warranty warranty)
         {
