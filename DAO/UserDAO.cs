@@ -1,5 +1,5 @@
-﻿using BusinessObjects.Models;
-using DAO.Context;
+﻿using BusinessObjects.Context;
+using BusinessObjects.Models;
 using DAO.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,11 +7,11 @@ namespace DAO
 {
     public class UserDAO : Singleton<UserDAO>
     {
-        private readonly JssatsV2Context _context;
+        private readonly JssatsContext _context;
 
         public UserDAO()
         {
-            _context = new JssatsV2Context();
+            _context = new JssatsContext();
         }
 
         public async Task<User?> GetUser(string email, string password)

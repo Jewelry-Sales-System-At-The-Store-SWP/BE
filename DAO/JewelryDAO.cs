@@ -1,6 +1,6 @@
-﻿using BusinessObjects.DTO;
+﻿using BusinessObjects.Context;
+using BusinessObjects.DTO;
 using BusinessObjects.Models;
-using DAO.Context;
 using DAO.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,25 +8,23 @@ namespace DAO
 {
     public class JewelryDAO : Singleton<JewelryDAO>
     {
-        private readonly JssatsV2Context _context;
+        private readonly JssatsContext _context;
         public JewelryDAO()
         {
-            _context = new JssatsV2Context();
+            _context = new JssatsContext();
         }
         public async Task<IEnumerable<Jewelry>> GetJewelries()
         {
-            return await _context.Jewelries.Include(jt => jt.JewelryType).Include(wr => wr.Warranty).ToListAsync();
+            return await _context.Jewelries.ToListAsync();
         }
 
         public async Task<Jewelry?> GetJewelryById(int id)
         {
-            return await _context.Jewelries.Include(jt => jt.JewelryType).Include(wr => wr.Warranty).FirstOrDefaultAsync(p => p.JewelryId == id);
+            return await _context.Jewelries.FirstOrDefaultAsync(p => p.JewelryId == id);
         }
 
         public async Task<int> CreateJewelry(Jewelry jewelry)
         {
-            var maxJewelryId = await _context.Jewelries.MaxAsync(j => j.JewelryId);
-            jewelry.JewelryId = maxJewelryId + 1;
             _context.Jewelries.Add(jewelry);
             return await _context.SaveChangesAsync();
         }
