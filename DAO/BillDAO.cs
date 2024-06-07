@@ -5,39 +5,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAO
 {
-    public class BillDAO : Singleton<BillDAO>
+    public class BillDao : Singleton<BillDao>
     {
-        private readonly JssatsContext _context;
-        public BillDAO()
-        {
-            _context = new JssatsContext();
-        }
+        private readonly JssatsContext _context = new();
         public async Task<IEnumerable<Bill>> GetBills()
         {
-            return await _context.Bills
-                                 .Include(b => b.BillJewelries)
-                                     .ThenInclude(bj => bj.Jewelry)
-                                         .ThenInclude(j => j.JewelryType)
-                                 .Include(b => b.Customer)
-                                 .ToListAsync();
-        }
-        public async Task<Bill?> GetBillById(int id)
-        {
-            return await _context.Bills
-                             .Include(b => b.BillJewelries)
-                                 .ThenInclude(bj => bj.Jewelry)
-                                     .ThenInclude(j => j.JewelryType)
-                             .FirstOrDefaultAsync(b => b.BillId == id);
+            return await _context.Bills.ToListAsync();
         }
 
-        public async Task<Bill?> FindBillByCustomerId(int customerId)
+        public async Task<Bill?> GetBillById(int id)
         {
-            return await _context.Bills
-                                 .Include(b => b.BillJewelries)
-                                     .ThenInclude(bj => bj.Jewelry)
-                                         .ThenInclude(j => j.JewelryType)
-                                 .Include(b => b.Customer)
-                                 .FirstOrDefaultAsync(b => b.CustomerId == customerId);
+            return await _context.Bills.FindAsync(id);
         }
 
         public async Task<int> CreateBill(Bill bill)
