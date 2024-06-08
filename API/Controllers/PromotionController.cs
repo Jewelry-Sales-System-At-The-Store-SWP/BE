@@ -1,4 +1,4 @@
-﻿using BusinessObjects.DTO;
+﻿using BusinessObjects.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Implementation;
@@ -10,14 +10,19 @@ namespace API.Controllers
     [ApiController]
     public class PromotionController(IPromotionService promotionService) : ControllerBase
     {
-        public IPromotionService PromotionService { get; } = promotionService;
-        [HttpGet("GetAll")]
+        private IPromotionService PromotionService { get; } = promotionService;
+        [HttpGet("GetPromotions")]
         public async Task<IActionResult> GetAllPromotion()
         {
             var result = await PromotionService.GetPromotions();
             return Ok(result);
         }
-
+        [HttpGet("GetPromotionById")]
+        public async Task<IActionResult> GetPromotionById(int id)
+        {
+            var result = await PromotionService.GetPromotionById(id);
+            return Ok(result);
+        }
         [HttpPost("AddNewPromotion")]
         public async Task<IActionResult> AddPromotion(PromotionDto promotionDto)
         {

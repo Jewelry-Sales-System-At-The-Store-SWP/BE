@@ -17,14 +17,14 @@ namespace Repositories.Implementation
             return await PromotionDao.Instance.DeletePromotion(id);
         }
 
-        public async Task<IEnumerable<Promotion?>?> GetAll()
+        public async Task<IEnumerable<Promotion?>?> Gets()
         {
             return await PromotionDao.Instance.GetPromotions();
         }
 
         public Task<Promotion?> GetById(int id)
         {
-            throw new NotImplementedException();
+            return PromotionDao.Instance.GetPromotionById(id);
         }
 
         public async Task<int> Update(int id, Promotion promotion)
