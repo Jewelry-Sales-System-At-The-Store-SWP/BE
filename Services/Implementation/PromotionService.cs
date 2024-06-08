@@ -1,8 +1,8 @@
-﻿using BusinessObjects.DTO;
-using BusinessObjects.Models;
+﻿using BusinessObjects.Models;
 using Repositories.Interface;
 using Services.Interface;
 using AutoMapper;
+using BusinessObjects.Dto;
 
 namespace Services.Implementation
 {
@@ -23,7 +23,12 @@ namespace Services.Implementation
 
         public async Task<IEnumerable<Promotion?>?> GetPromotions()
         {
-            return await PromotionRepository.GetAll();
+            return await PromotionRepository.Gets();
+        }
+
+        public Task<Promotion?> GetPromotionById(int id)
+        {
+            return PromotionRepository.GetById(id);
         }
 
         public async Task<int> UpdatePromotion(int id, PromotionDto promotionDto)

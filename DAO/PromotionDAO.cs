@@ -1,5 +1,4 @@
 ﻿using BusinessObjects.Context;
-using BusinessObjects.DTO;
 using BusinessObjects.Models;
 using DAO.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +18,10 @@ namespace DAO
         {
             return await _context.Promotions.ToListAsync();
         }
-
+        public async Task<Promotion?> GetPromotionById(int id)
+        {
+            return await _context.Promotions.FindAsync(id);
+        }
         public async Task<int> CreatePromotion(Promotion promotion)
         {
             await _context.Promotions.AddAsync(promotion);
