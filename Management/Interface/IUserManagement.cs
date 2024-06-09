@@ -11,5 +11,9 @@ namespace Management.Interface
         public Task<IEnumerable<Bill?>?> GetBills();
         public Task<Bill?> GetBillById(int id);
         public Task<BillResponseDto> CreateBill(BillRequestDto billRequestDto);
+        
+        public Task<User> GetUserById(int id);
+        public Task<int> AddUser(UserDto? userDto);
+        public Task<int> UpdateUser(int id, UserDto userDto);
     }
 }
