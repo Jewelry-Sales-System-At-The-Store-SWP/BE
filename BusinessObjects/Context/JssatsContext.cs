@@ -53,7 +53,6 @@ namespace BusinessObjects.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Warranty> Warranties { get; set; }
         public DbSet<MasterPrice> MasterPrices { get; set; }
-        public DbSet<Material> Materials { get; set; }
         public DbSet<JewelryMaterial> JewelryMaterials { get; set; }
         public DbSet<GoldPrice> GoldPrices { get; set; }
         public DbSet<StonePrice> StonePrices { get; set; }
@@ -173,14 +172,7 @@ namespace BusinessObjects.Context
                 .Property(mp => mp.MasterPriceId)
                 .ValueGeneratedOnAdd()
                 .UseIdentityColumn();
-
-            modelBuilder.Entity<Material>()
-                .HasKey(m => m.MaterialId);
-
-            modelBuilder.Entity<Material>()
-                .Property(m => m.MaterialId)
-                .ValueGeneratedOnAdd()
-                .UseIdentityColumn();
+            
 
             modelBuilder.Entity<StonePrice>()
                 .HasKey(sp => sp.StonePriceId);
@@ -208,17 +200,7 @@ namespace BusinessObjects.Context
                 .HasForeignKey(jm => jm.JewelryId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<JewelryMaterial>()
-                .HasOne(jm => jm.Material)
-                .WithMany(m => m.JewelryMaterials)
-                .HasForeignKey(jm => jm.MaterialId)
-                .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<JewelryMaterial>()
-                .HasOne(jm => jm.MasterPrice)
-                .WithMany(mp => mp.JewelryMaterials)
-                .HasForeignKey(jm => jm.MasterPriceId)
-                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Warranty>()
                 .HasOne(w => w.Jewelry)
@@ -236,7 +218,13 @@ namespace BusinessObjects.Context
                 .WithMany(u => u.Bills)
                 .HasForeignKey(b => b.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
-
+            
+            modelBuilder.Entity<Bill>()
+                .HasOne(b => b.Counter)
+                .WithMany(c => c.Bills)
+                .HasForeignKey(b => b.CounterId)
+                .OnDelete(DeleteBehavior.NoAction);
+            
             modelBuilder.Entity<BillJewelry>()
                 .HasOne(bj => bj.Bill)
                 .WithMany(b => b.BillJewelries)
@@ -336,12 +324,6 @@ namespace BusinessObjects.Context
                 new Jewelry { JewelryId = 4, Name = "Vong tay Xanh", JewelryTypeId = 2, Barcode = "SFA131", LaborCost = 552, IsSold = true}
             );
 
-            modelBuilder.Entity<Material>().HasData(
-                new Material { MaterialId = 1, Name = "Vang", Description = "Vang 18k"},
-                new Material { MaterialId = 2, Name = "Bac", Description = "Bac 9999"},
-                new Material { MaterialId = 3, Name = "Kim cuong", Description = "Kim cuong 1 ly"}
-            );
-
             modelBuilder.Entity<Promotion>().HasData(
                 new Promotion
                 {
@@ -359,16 +341,7 @@ namespace BusinessObjects.Context
                     StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(10)
                 }
             );
-            modelBuilder.Entity<JewelryMaterial>().HasData(
-                new JewelryMaterial
-                    { JewelryMaterialId = 1, MaterialId = 1, JewelryId = 1, MasterPriceId = 2, Weight = 300 },
-                new JewelryMaterial
-                    { JewelryMaterialId = 2, MaterialId = 2, JewelryId = 1, MasterPriceId = 2, Weight = 400 },
-                new JewelryMaterial
-                    { JewelryMaterialId = 3, MaterialId = 1, JewelryId = 2, MasterPriceId = 2, Weight = 500 },
-                new JewelryMaterial
-                    { JewelryMaterialId = 4, MaterialId = 2, JewelryId = 2, MasterPriceId = 2, Weight = 500 }
-            );
+            
             modelBuilder.Entity<Bill>().HasData(
                 new Bill { BillId = 1, CustomerId = 1, UserId = 1, SaleDate = DateTime.Now, TotalAmount = 500 },
                 new Bill { BillId = 2, CustomerId = 2, UserId = 2, SaleDate = DateTime.Now, TotalAmount = 1200 }
@@ -416,14 +389,7 @@ namespace BusinessObjects.Context
                     Type = "18k"
                 }
             );
-            modelBuilder.Entity<MasterPrice>().HasData(
-                new MasterPrice
-                    { MasterPriceId = 1, GoldPriceId = 1, StonePriceId = 1, SellOutPrice = 500, Date = DateTime.Now },
-                new MasterPrice
-                    { MasterPriceId = 2, GoldPriceId = 2, StonePriceId = 2, SellOutPrice = 600, Date = DateTime.Now },
-                new MasterPrice
-                    { MasterPriceId = 3, GoldPriceId = 3, StonePriceId = 3, SellOutPrice = 512, Date = DateTime.Now }
-            );
+            
             modelBuilder.Entity<Purchase>().HasData(
                 new Purchase
                 {

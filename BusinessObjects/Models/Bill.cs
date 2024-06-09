@@ -11,6 +11,8 @@ public partial class Bill
     public int? CustomerId { get; set; }
 
     public int? UserId { get; set; }
+    
+    public int? CounterId { get; set; }
 
     public double? TotalAmount { get; set; }
 
@@ -21,4 +23,6 @@ public partial class Bill
     public virtual Customer? Customer { get; set; }
 
     public virtual User? User { get; set; }
+    
+    public virtual Counter? Counter { get; set; }
 }

@@ -30,6 +30,9 @@ namespace BusinessObjects.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillId"));
 
+                    b.Property<int?>("CounterId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
@@ -44,6 +47,8 @@ namespace BusinessObjects.Migrations
 
                     b.HasKey("BillId");
 
+                    b.HasIndex("CounterId");
+
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("UserId");
@@ -55,7 +60,7 @@ namespace BusinessObjects.Migrations
                         {
                             BillId = 1,
                             CustomerId = 1,
-                            SaleDate = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6291),
+                            SaleDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9326),
                             TotalAmount = 500.0,
                             UserId = 1
                         },
@@ -63,7 +68,7 @@ namespace BusinessObjects.Migrations
                         {
                             BillId = 2,
                             CustomerId = 2,
-                            SaleDate = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6293),
+                            SaleDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9328),
                             TotalAmount = 1200.0,
                             UserId = 2
                         });
@@ -263,7 +268,7 @@ namespace BusinessObjects.Migrations
                             GoldPriceId = 1,
                             BuyPrice = 1000f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6374),
+                            LastUpdated = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9423),
                             SellPrice = 1200f,
                             Type = "9999"
                         },
@@ -272,7 +277,7 @@ namespace BusinessObjects.Migrations
                             GoldPriceId = 2,
                             BuyPrice = 1200f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6376),
+                            LastUpdated = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9425),
                             SellPrice = 1400f,
                             Type = "SCJ"
                         },
@@ -281,7 +286,7 @@ namespace BusinessObjects.Migrations
                             GoldPriceId = 3,
                             BuyPrice = 1400f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6378),
+                            LastUpdated = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9426),
                             SellPrice = 1600f,
                             Type = "18k"
                         });
@@ -363,61 +368,30 @@ namespace BusinessObjects.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JewelryMaterialId"));
 
+                    b.Property<int>("GoldPriceId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("GoldQuantity")
+                        .HasColumnType("real");
+
                     b.Property<int>("JewelryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MasterPriceId")
+                    b.Property<int>("StonePriceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MaterialId")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Weight")
+                    b.Property<float>("StoneQuantity")
                         .HasColumnType("real");
 
                     b.HasKey("JewelryMaterialId");
 
+                    b.HasIndex("GoldPriceId");
+
                     b.HasIndex("JewelryId");
 
-                    b.HasIndex("MasterPriceId");
-
-                    b.HasIndex("MaterialId");
+                    b.HasIndex("StonePriceId");
 
                     b.ToTable("JewelryMaterials");
-
-                    b.HasData(
-                        new
-                        {
-                            JewelryMaterialId = 1,
-                            JewelryId = 1,
-                            MasterPriceId = 2,
-                            MaterialId = 1,
-                            Weight = 300f
-                        },
-                        new
-                        {
-                            JewelryMaterialId = 2,
-                            JewelryId = 1,
-                            MasterPriceId = 2,
-                            MaterialId = 2,
-                            Weight = 400f
-                        },
-                        new
-                        {
-                            JewelryMaterialId = 3,
-                            JewelryId = 2,
-                            MasterPriceId = 2,
-                            MaterialId = 1,
-                            Weight = 500f
-                        },
-                        new
-                        {
-                            JewelryMaterialId = 4,
-                            JewelryId = 2,
-                            MasterPriceId = 2,
-                            MaterialId = 2,
-                            Weight = 500f
-                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.JewelryType", b =>
@@ -461,17 +435,17 @@ namespace BusinessObjects.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MasterPriceId"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("GoldPriceId")
                         .HasColumnType("int");
 
-                    b.Property<float>("SellOutPrice")
+                    b.Property<float>("GoldStorePrice")
                         .HasColumnType("real");
 
                     b.Property<int>("StonePriceId")
                         .HasColumnType("int");
+
+                    b.Property<float>("StoneStorePrice")
+                        .HasColumnType("real");
 
                     b.HasKey("MasterPriceId");
 
@@ -480,71 +454,6 @@ namespace BusinessObjects.Migrations
                     b.HasIndex("StonePriceId");
 
                     b.ToTable("MasterPrices");
-
-                    b.HasData(
-                        new
-                        {
-                            MasterPriceId = 1,
-                            Date = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6395),
-                            GoldPriceId = 1,
-                            SellOutPrice = 500f,
-                            StonePriceId = 1
-                        },
-                        new
-                        {
-                            MasterPriceId = 2,
-                            Date = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6397),
-                            GoldPriceId = 2,
-                            SellOutPrice = 600f,
-                            StonePriceId = 2
-                        },
-                        new
-                        {
-                            MasterPriceId = 3,
-                            Date = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6398),
-                            GoldPriceId = 3,
-                            SellOutPrice = 512f,
-                            StonePriceId = 3
-                        });
-                });
-
-            modelBuilder.Entity("BusinessObjects.Models.Material", b =>
-                {
-                    b.Property<int>("MaterialId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaterialId"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MaterialId");
-
-                    b.ToTable("Materials");
-
-                    b.HasData(
-                        new
-                        {
-                            MaterialId = 1,
-                            Description = "Vang 18k",
-                            Name = "Vang"
-                        },
-                        new
-                        {
-                            MaterialId = 2,
-                            Description = "Bac 9999",
-                            Name = "Bac"
-                        },
-                        new
-                        {
-                            MaterialId = 3,
-                            Description = "Kim cuong 1 ly",
-                            Name = "Kim cuong"
-                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.Promotion", b =>
@@ -583,8 +492,8 @@ namespace BusinessObjects.Migrations
                             PromotionId = 1,
                             Description = "Giam gia 10%",
                             DiscountRate = 1.0,
-                            EndDate = new DateTime(2024, 6, 17, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6237),
-                            StartDate = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6224),
+                            EndDate = new DateTime(2024, 6, 19, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9296),
+                            StartDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9286),
                             Type = "Giam gia"
                         },
                         new
@@ -592,8 +501,8 @@ namespace BusinessObjects.Migrations
                             PromotionId = 2,
                             Description = "Giam gia 20%",
                             DiscountRate = 2.0,
-                            EndDate = new DateTime(2024, 6, 17, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6243),
-                            StartDate = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6243),
+                            EndDate = new DateTime(2024, 6, 19, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9301),
+                            StartDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9301),
                             Type = "Giam gia"
                         },
                         new
@@ -601,8 +510,8 @@ namespace BusinessObjects.Migrations
                             PromotionId = 3,
                             Description = "Giam gia 30%",
                             DiscountRate = 3.0,
-                            EndDate = new DateTime(2024, 6, 17, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6245),
-                            StartDate = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6245),
+                            EndDate = new DateTime(2024, 6, 19, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9303),
+                            StartDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9303),
                             Type = "Giam gia"
                         });
                 });
@@ -650,7 +559,7 @@ namespace BusinessObjects.Migrations
                             CustomerId = 1,
                             IsBuyBack = 0,
                             JewelryId = 1,
-                            PurchaseDate = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6418),
+                            PurchaseDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9445),
                             PurchasePrice = 500.0,
                             UserId = 1
                         },
@@ -660,7 +569,7 @@ namespace BusinessObjects.Migrations
                             CustomerId = 2,
                             IsBuyBack = 1,
                             JewelryId = 2,
-                            PurchaseDate = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6420),
+                            PurchaseDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9447),
                             PurchasePrice = 300.0,
                             UserId = 1
                         },
@@ -670,7 +579,7 @@ namespace BusinessObjects.Migrations
                             CustomerId = 2,
                             IsBuyBack = 0,
                             JewelryId = 3,
-                            PurchaseDate = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6422),
+                            PurchaseDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9449),
                             PurchasePrice = 1000.0,
                             UserId = 1
                         });
@@ -742,7 +651,7 @@ namespace BusinessObjects.Migrations
                             StonePriceId = 1,
                             BuyPrice = 300f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6352),
+                            LastUpdated = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9398),
                             SellPrice = 400f,
                             Type = "Ruby"
                         },
@@ -751,7 +660,7 @@ namespace BusinessObjects.Migrations
                             StonePriceId = 2,
                             BuyPrice = 400f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6354),
+                            LastUpdated = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9400),
                             SellPrice = 500f,
                             Type = "Sapphire"
                         },
@@ -760,7 +669,7 @@ namespace BusinessObjects.Migrations
                             StonePriceId = 3,
                             BuyPrice = 500f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTime(2024, 6, 7, 22, 15, 47, 340, DateTimeKind.Local).AddTicks(6355),
+                            LastUpdated = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9401),
                             SellPrice = 600f,
                             Type = "Emerald"
                         });
@@ -860,6 +769,11 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Models.Bill", b =>
                 {
+                    b.HasOne("BusinessObjects.Models.Counter", "Counter")
+                        .WithMany("Bills")
+                        .HasForeignKey("CounterId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("BusinessObjects.Models.Customer", "Customer")
                         .WithMany("Bills")
                         .HasForeignKey("CustomerId")
@@ -869,6 +783,8 @@ namespace BusinessObjects.Migrations
                         .WithMany("Bills")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Counter");
 
                     b.Navigation("Customer");
 
@@ -922,29 +838,29 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Models.JewelryMaterial", b =>
                 {
+                    b.HasOne("BusinessObjects.Models.GoldPrice", "GoldPrice")
+                        .WithMany("JewelryMaterials")
+                        .HasForeignKey("GoldPriceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BusinessObjects.Models.Jewelry", "Jewelry")
                         .WithMany("JewelryMaterials")
                         .HasForeignKey("JewelryId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("BusinessObjects.Models.MasterPrice", "MasterPrice")
+                    b.HasOne("BusinessObjects.Models.StonePrice", "StonePrice")
                         .WithMany("JewelryMaterials")
-                        .HasForeignKey("MasterPriceId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("StonePriceId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BusinessObjects.Models.Material", "Material")
-                        .WithMany("JewelryMaterials")
-                        .HasForeignKey("MaterialId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                    b.Navigation("GoldPrice");
 
                     b.Navigation("Jewelry");
 
-                    b.Navigation("MasterPrice");
-
-                    b.Navigation("Material");
+                    b.Navigation("StonePrice");
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.MasterPrice", b =>
@@ -1027,6 +943,8 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Models.Counter", b =>
                 {
+                    b.Navigation("Bills");
+
                     b.Navigation("Users");
                 });
 
@@ -1039,6 +957,8 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Models.GoldPrice", b =>
                 {
+                    b.Navigation("JewelryMaterials");
+
                     b.Navigation("MasterPrices");
                 });
 
@@ -1058,16 +978,6 @@ namespace BusinessObjects.Migrations
                     b.Navigation("Jewelries");
                 });
 
-            modelBuilder.Entity("BusinessObjects.Models.MasterPrice", b =>
-                {
-                    b.Navigation("JewelryMaterials");
-                });
-
-            modelBuilder.Entity("BusinessObjects.Models.Material", b =>
-                {
-                    b.Navigation("JewelryMaterials");
-                });
-
             modelBuilder.Entity("BusinessObjects.Models.Promotion", b =>
                 {
                     b.Navigation("BillPromotions");
@@ -1080,6 +990,8 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Models.StonePrice", b =>
                 {
+                    b.Navigation("JewelryMaterials");
+
                     b.Navigation("MasterPrices");
                 });
 
