@@ -22,6 +22,27 @@ namespace DAO
         {
             return await _context.Users.ToListAsync();
         }
+        public async Task<int> AddUser(User user)
+        {
+            _context.Users.Add(user);
+            return await _context.SaveChangesAsync();
+        }
+        public async Task<int> CreateUser(User user)
+        {
+            await _context.Users.AddAsync(user);
+            return await _context.SaveChangesAsync();
+        }
+        public async Task<int> UpdateUser(int Id, User user)
+        {
+           var existUser = await _context.Users.FirstOrDefaultAsync(x => x.UserId == Id);
+           if (existUser == null) return 0;
+           existUser.Email = user.Email;
+           existUser.Password = user.Password;
+           existUser.CounterId = user.CounterId;
+           existUser.RoleId = user.RoleId;
+           existUser.Status = user.Status;
+           return await _context.SaveChangesAsync();
+        }
         public async Task<User?> GetUserById(int id)
         {
             return await _context.Users.FindAsync(id);

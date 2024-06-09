@@ -1,13 +1,15 @@
-﻿using BusinessObjects.Dto;
+﻿using AutoMapper;
+using BusinessObjects.Dto;
 using BusinessObjects.Models;
 using Repositories.Interface;
 using Services.Interface;
 
 namespace Services.Implementation
 {
-    public class UserService(IUserRepository userRepository) : IUserService
+    public class UserService(IUserRepository userRepository, IMapper mapper) : IUserService
     {
         public IUserRepository UserRepository { get; } = userRepository;
+        public IMapper Mapper { get; } = mapper;
 
         public async Task<User?> Login(LoginDto loginDto)
         {
@@ -23,6 +25,23 @@ namespace Services.Implementation
         {
             var users = await UserRepository.Find(a => a.Email == email && a.Password == password);
             return users.Any();
+        }
+        
+        public async Task<int> UpdateUser(int id, UserDto userDto)
+        {
+            var user = Mapper.Map<User>(userDto);
+            return await UserRepository.Update(id, user);
+        }
+
+        public async Task<int> AddUser(UserDto userDto)
+        {
+            var user = Mapper.Map<User>(userDto);
+            return await UserRepository.Create(user);
+        }
+
+        public Task<User?> GetUserById(int id)
+        {
+            return UserRepository.GetById(id);
         }
     }
 }

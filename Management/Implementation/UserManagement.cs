@@ -35,5 +35,20 @@ namespace Management.Implementation
         {
             return await BillService.Create(billRequestDto);
         }
+
+        public async Task<User?> GetUserById(int id)
+        {
+            return await UserService.GetUserById(id);
+        }
+
+        public async Task<int> AddUser(UserDto userDto)
+        {
+            return await UserService.AddUser(userDto);
+        }
+
+        public async Task<int> UpdateUser(int id, UserDto user)
+        {
+            return await UserService.UpdateUser(id, user);
+        }
     }
 }
