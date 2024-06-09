@@ -23,9 +23,9 @@ namespace Repositories.Implementation
             return await UserDao.Instance.GetUserById(id);
         }
 
-        public Task<int> Update(int id, User entity)
+        public async Task<int> Update(int id, User entity)
         {
-            throw new NotImplementedException();
+           return await UserDao.Instance.UpdateUser(id, entity);
         }
 
         public async Task<IEnumerable<User?>?> Gets()
@@ -33,9 +33,9 @@ namespace Repositories.Implementation
             return await UserDao.Instance.GetUsers();
         }
 
-        public Task<int> Create(User entity)
+        public async Task<int> Create(User entity)
         {
-            throw new NotImplementedException();
+            return await UserDao.Instance.CreateUser(entity);
         }
     }
 }
