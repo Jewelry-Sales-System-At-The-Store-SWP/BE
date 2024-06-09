@@ -43,5 +43,10 @@ namespace Services.Implementation
         {
             return UserRepository.GetById(id);
         }
+
+        public Task<int> DeleteUser(int id)
+        {
+            return UserRepository.Delete(id);
+        }
     }
 }

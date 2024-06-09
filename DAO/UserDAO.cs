@@ -47,5 +47,12 @@ namespace DAO
         {
             return await _context.Users.FindAsync(id);
         }
+        public async Task<int> DeleteUser(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null) return 0;
+            _context.Users.Remove(user);
+            return await _context.SaveChangesAsync();
+        }
     }
 }

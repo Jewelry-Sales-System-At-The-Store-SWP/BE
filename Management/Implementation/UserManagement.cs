@@ -50,5 +50,10 @@ namespace Management.Implementation
         {
             return await UserService.UpdateUser(id, user);
         }
+
+        public async Task<int> DeleteUser(int id)
+        {
+            return await UserService.DeleteUser(id);
+        }
     }
 }

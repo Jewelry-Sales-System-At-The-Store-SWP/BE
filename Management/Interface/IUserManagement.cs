@@ -15,5 +15,7 @@ namespace Management.Interface
         public Task<User> GetUserById(int id);
         public Task<int> AddUser(UserDto? userDto);
         public Task<int> UpdateUser(int id, UserDto userDto);
+        
+        public Task<int> DeleteUser(int id);
     }
 }

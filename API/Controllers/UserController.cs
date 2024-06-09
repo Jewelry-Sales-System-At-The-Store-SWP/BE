@@ -36,4 +36,13 @@ public class UserController(IUserManagement userManagement) : ControllerBase
         if (result > 0) return Ok(new { message = "Add user success" });
         return BadRequest(new { message = "Add user fail" });
     }
+    [HttpDelete("DeleteUser/{id}")]
+    public async Task<IActionResult> DeleteUser(int id)
+    {
+        var user = await UserManagement.GetUserById(id);
+        if (user == null) return NotFound(new { message = "User not found" });
+        var result = await UserManagement.DeleteUser(id);
+        if (result > 0) return Ok(new { message = "Delete user success" });
+        return BadRequest(new { message = "Delete user fail" });
+    }
 }
