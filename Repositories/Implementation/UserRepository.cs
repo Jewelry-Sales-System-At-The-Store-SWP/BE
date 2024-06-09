@@ -20,7 +20,9 @@ namespace Repositories.Implementation
 
         public async Task<User?> GetById(int id)
         {
-            return await UserDao.Instance.GetUserById(id);
+            var user = await UserDao.Instance.GetUserById(id);
+            user.Role = await RoleDao.Instance.GetRoleById(user.RoleId);
+            return user;
         }
 
         public async Task<int> Update(int id, User entity)
@@ -30,12 +32,22 @@ namespace Repositories.Implementation
 
         public async Task<IEnumerable<User?>?> Gets()
         {
-            return await UserDao.Instance.GetUsers();
+            var users = await UserDao.Instance.GetUsers();
+            foreach (var user in users)
+            {
+                var userRole = await RoleDao.Instance.GetRoleById(user.RoleId);
+                user.Role = userRole;
+            }
+            return users;
         }
 
         public async Task<int> Create(User entity)
         {
             return await UserDao.Instance.CreateUser(entity);
+        }
+        public async Task<int> Delete(int id)
+        {
+            return await UserDao.Instance.DeleteUser(id);
         }
     }
 }
