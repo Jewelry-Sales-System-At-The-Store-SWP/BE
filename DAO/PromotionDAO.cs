@@ -30,7 +30,15 @@ namespace DAO
         
         public async Task<int> UpdatePromotion(int id, Promotion promotion)
         {
-            throw new NotImplementedException();
+            var existPromotion = await _context.Promotions.FirstOrDefaultAsync(x => x.PromotionId == id);
+            if (existPromotion == null) return 0;
+            existPromotion.Type = promotion.Type;
+            existPromotion.Description = promotion.Description;
+            existPromotion.EndDate = promotion.EndDate;
+            existPromotion.StartDate = promotion.StartDate;
+            existPromotion.ApproveManager = promotion.ApproveManager;
+            existPromotion.DiscountRate = promotion.DiscountRate;
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<int> DeletePromotion(int id)

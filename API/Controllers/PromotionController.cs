@@ -1,7 +1,5 @@
 ﻿using BusinessObjects.Dto;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Services.Implementation;
 using Services.Interface;
 
 namespace API.Controllers
