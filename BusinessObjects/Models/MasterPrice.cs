@@ -2,9 +2,9 @@
 
 public class MasterPrice
 {
-    public int MasterPriceId { get; set; }
-    public int StonePriceId { get; set; }
-    public int GoldPriceId { get; set; }
+    public required string MasterPriceId { get; set; }
+    public string? StonePriceId { get; set; }
+    public string? GoldPriceId { get; set; }
     
     public float GoldStorePrice { get; set; }
     
