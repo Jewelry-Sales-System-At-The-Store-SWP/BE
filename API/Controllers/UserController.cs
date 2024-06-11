@@ -16,7 +16,7 @@ public class UserController(IUserManagement userManagement) : ControllerBase
         return Ok(users);
     }
     [HttpGet("GetUserById/{id}")]
-    public async Task<IActionResult> GetUserById(int id)
+    public async Task<IActionResult> GetUserById(string id)
     {
         var user = await UserManagement.GetUserById(id);
         if (user != null) return Ok(user);
@@ -37,7 +37,7 @@ public class UserController(IUserManagement userManagement) : ControllerBase
         return BadRequest(new { message = "Add user fail" });
     }
     [HttpDelete("DeleteUser/{id}")]
-    public async Task<IActionResult> DeleteUser(int id)
+    public async Task<IActionResult> DeleteUser(string id)
     {
         var user = await UserManagement.GetUserById(id);
         if (user == null) return NotFound(new { message = "User not found" });

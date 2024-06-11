@@ -2,6 +2,7 @@
 using BusinessObjects.Models;
 using DAO.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Tools;
 
 namespace DAO;
 
@@ -23,6 +24,7 @@ public class PurchaseDao : Singleton<PurchaseDao>
     }
     public async Task<Purchase> CreatePurchase(Purchase purchase)
     {
+        purchase.PurchaseId = IdGenerator.GenerateId();
         _context.Purchases.Add(purchase);
         await _context.SaveChangesAsync();
         return purchase;

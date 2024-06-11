@@ -26,7 +26,7 @@ namespace Management.Implementation
             return await BillService.GetBills();
         }
 
-        public async Task<Bill?> GetBillById(int id)
+        public async Task<Bill?> GetBillById(string id)
         {
             return await BillService.GetById(id);
         }
@@ -36,7 +36,7 @@ namespace Management.Implementation
             return await BillService.Create(billRequestDto);
         }
 
-        public async Task<User?> GetUserById(int id)
+        public async Task<User?> GetUserById(string id)
         {
             return await UserService.GetUserById(id);
         }
@@ -46,12 +46,12 @@ namespace Management.Implementation
             return await UserService.AddUser(userDto);
         }
 
-        public async Task<int> UpdateUser(int id, UserDto user)
+        public async Task<int> UpdateUser(string id, UserDto user)
         {
             return await UserService.UpdateUser(id, user);
         }
 
-        public async Task<int> DeleteUser(int id)
+        public async Task<int> DeleteUser(string id)
         {
             return await UserService.DeleteUser(id);
         }

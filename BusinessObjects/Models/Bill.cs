@@ -6,13 +6,13 @@ namespace BusinessObjects.Models;
 
 public partial class Bill
 {
-    public int BillId { get; set; }
+    public required string BillId { get; set; }
 
-    public int? CustomerId { get; set; }
+    public string? CustomerId { get; set; }
 
-    public int? UserId { get; set; }
+    public string? UserId { get; set; }
     
-    public int? CounterId { get; set; }
+    public string? CounterId { get; set; }
 
     public double? TotalAmount { get; set; }
 
