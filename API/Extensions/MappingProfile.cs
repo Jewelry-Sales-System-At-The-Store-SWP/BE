@@ -13,6 +13,7 @@ namespace API.Extensions
             CreateMap<JewelryType, JewelryTypeDto>().ReverseMap();
             CreateMap<Promotion, PromotionDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<Role, RoleDto>().ReverseMap();
         }
     }
 }
