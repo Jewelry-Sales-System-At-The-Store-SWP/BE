@@ -3,7 +3,7 @@ using BusinessObjects.Models;
 
 namespace Services.Interface;
 
-public interface IGoldPriceService
+public interface ITokenService
 {
-    Task<IEnumerable<GoldPriceResponseDto>?> GetGoldPrices();
+    Task<TokenResponseDto> CreateToken(User user);
 }
