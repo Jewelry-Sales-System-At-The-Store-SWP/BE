@@ -1,4 +1,4 @@
-﻿namespace BusinessObjects.Dto.ResponseDto;
+﻿namespace BusinessObjects.DTO.ResponseDto;
 
 public class GoldPriceResponseDto
 {

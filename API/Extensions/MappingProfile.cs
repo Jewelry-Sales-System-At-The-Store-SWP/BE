@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using BusinessObjects.Dto;
-using BusinessObjects.Dto.ResponseDto;
+using BusinessObjects.DTO;
+using BusinessObjects.DTO.ResponseDto;
 using BusinessObjects.Models;
 
 namespace API.Extensions

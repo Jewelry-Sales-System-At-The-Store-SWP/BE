@@ -14,5 +14,5 @@ public partial class GoldPrice
     public DateTimeOffset? LastUpdated { get; set; }
     
     public virtual ICollection<JewelryMaterial> JewelryMaterials { get; set; } = new List<JewelryMaterial>();
-    public virtual ICollection<MasterPrice> MasterPrices { get; set; } = new List<MasterPrice>();
+    public virtual ICollection<GoldMasterPrice> GoldMasterPrices { get; set; } = new List<GoldMasterPrice>();
 }

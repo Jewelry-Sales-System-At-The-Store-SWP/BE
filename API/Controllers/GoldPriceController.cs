@@ -10,7 +10,7 @@ namespace API.Controllers
     [ApiController]
     public class GoldPriceController(IGoldPriceService goldPriceService) : ControllerBase
     {
-        public IGoldPriceService GoldPriceService { get; } = goldPriceService;
+        private IGoldPriceService GoldPriceService { get; } = goldPriceService;
 
         [HttpGet]
         public async Task<IActionResult> Get()
