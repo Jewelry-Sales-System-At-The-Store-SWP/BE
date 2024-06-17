@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using BusinessObjects.DTO;
+using BusinessObjects.DTO.Bill;
+using BusinessObjects.DTO.BillReqRes;
 using BusinessObjects.DTO.ResponseDto;
 using BusinessObjects.Models;
 
@@ -18,6 +20,8 @@ namespace API.Extensions
             // ResponseDto Mapping
             CreateMap<Gold, GoldPriceResponseDto>().ReverseMap();
             CreateMap<Gem, GemPriceResponseDto>().ReverseMap();
+            //MongoMap
+            CreateMap<BillResponseDto, BillDetailDto>().ReverseMap();
         }
     }
 }
