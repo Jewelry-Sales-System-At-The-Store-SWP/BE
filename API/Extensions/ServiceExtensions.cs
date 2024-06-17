@@ -24,7 +24,11 @@ public static class ServiceExtensions
         serviceCollection.AddScoped<IJewelryTypeRepository, JewelryTypeRepository>();
         serviceCollection.AddScoped<IRoleRepository, RoleRepository>();
         serviceCollection.AddScoped<IGoldPriceRepository, GoldPriceRepository>();
+        serviceCollection.AddScoped<IGemPriceRepository, GemPriceRepository>();
+        serviceCollection.AddScoped<IBillPromotionRepository, BillPromotionRepository>();
+        serviceCollection.AddScoped<IBillJewelryRepository, BillJewelryRepository>();
         //Services
+        serviceCollection.AddScoped<IGemPriceService, GemPriceService>();
         serviceCollection.AddScoped<IGoldPriceService, GoldPriceService>();
         serviceCollection.AddScoped<IRoleService, RoleService>();
         serviceCollection.AddScoped<IUserService, UserService>();
@@ -46,7 +50,7 @@ public static class ServiceExtensions
         serviceCollection.AddScoped<PromotionDao>();
         serviceCollection.AddScoped<PurchaseDao>();
         serviceCollection.AddScoped<RoleDao>();
-        serviceCollection.AddScoped<StonePriceDao>();
+        serviceCollection.AddScoped<GemPriceDao>();
         serviceCollection.AddScoped<UserDao>();
         serviceCollection.AddScoped<WarrantyDao>();
         serviceCollection.AddScoped<JewelryMaterialDao>();
