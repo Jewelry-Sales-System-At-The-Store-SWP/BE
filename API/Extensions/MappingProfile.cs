@@ -17,6 +17,7 @@ namespace API.Extensions
             CreateMap<Role, RoleDto>().ReverseMap();
             // ResponseDto Mapping
             CreateMap<Gold, GoldPriceResponseDto>().ReverseMap();
+            CreateMap<Gem, GemPriceResponseDto>().ReverseMap();
         }
     }
 }

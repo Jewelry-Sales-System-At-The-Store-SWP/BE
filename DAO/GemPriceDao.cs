@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAO;
 
-public class StonePriceDao 
+public class GemPriceDao 
 {
     private readonly JssatsContext _context;
-    public StonePriceDao()
+    public GemPriceDao()
     {
         _context = new JssatsContext();
     }

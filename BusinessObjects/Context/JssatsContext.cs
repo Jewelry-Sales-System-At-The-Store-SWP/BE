@@ -97,10 +97,10 @@ namespace BusinessObjects.Context
                 .HasColumnType("varchar(20)");
 
             modelBuilder.Entity<Gold>()
-                .HasKey(gp => gp.GoldPriceId);
+                .HasKey(gp => gp.GoldId);
 
             modelBuilder.Entity<Gold>()
-                .Property(gp => gp.GoldPriceId)
+                .Property(gp => gp.GoldId)
                 .HasColumnType("varchar(20)");
 
             modelBuilder.Entity<Jewelry>()
@@ -154,10 +154,10 @@ namespace BusinessObjects.Context
             
 
             modelBuilder.Entity<Gem>()
-                .HasKey(sp => sp.StonePriceId);
+                .HasKey(sp => sp.GemId);
 
             modelBuilder.Entity<Gem>()
-                .Property(sp => sp.StonePriceId)
+                .Property(sp => sp.GemId)
                 .HasColumnType("varchar(20)");
             // Relationships
 
@@ -353,17 +353,17 @@ namespace BusinessObjects.Context
             modelBuilder.Entity<Gem>().HasData(
                 new Gem
                 {
-                    StonePriceId = "1", BuyPrice = 300, SellPrice = 400, LastUpdated = DateTime.Now, Type = "Ruby",
+                    GemId = "1", BuyPrice = 300, SellPrice = 400, LastUpdated = DateTime.Now, Type = "Ruby",
                     City = "Ha Noi"
                 },
                 new Gem
                 {
-                    StonePriceId = "2", BuyPrice = 400, SellPrice = 500, LastUpdated = DateTime.Now, Type = "Sapphire",
+                    GemId = "2", BuyPrice = 400, SellPrice = 500, LastUpdated = DateTime.Now, Type = "Sapphire",
                     City = "Ha Noi"
                 },
                 new Gem
                 {
-                    StonePriceId = "3", BuyPrice = 500, SellPrice = 600, LastUpdated = DateTime.Now, Type = "Emerald",
+                    GemId = "3", BuyPrice = 500, SellPrice = 600, LastUpdated = DateTime.Now, Type = "Emerald",
                     City = "Ha Noi"
                 }
             );
@@ -371,17 +371,17 @@ namespace BusinessObjects.Context
             modelBuilder.Entity<Gold>().HasData(
                 new Gold
                 {
-                    GoldPriceId = "1", BuyPrice = 1000, SellPrice = 1200, LastUpdated = DateTime.Now, City = "Ha Noi",
+                    GoldId = "1", BuyPrice = 1000, SellPrice = 1200, LastUpdated = DateTime.Now, City = "Ha Noi",
                     Type = "9999"
                 },
                 new Gold
                 {
-                    GoldPriceId = "2", BuyPrice = 1200, SellPrice = 1400, LastUpdated = DateTime.Now, City = "Ha Noi",
+                    GoldId = "2", BuyPrice = 1200, SellPrice = 1400, LastUpdated = DateTime.Now, City = "Ha Noi",
                     Type = "SCJ"
                 },
                 new Gold
                 {
-                    GoldPriceId = "3", BuyPrice = 1400, SellPrice = 1600, LastUpdated = DateTime.Now, City = "Ha Noi",
+                    GoldId = "3", BuyPrice = 1400, SellPrice = 1600, LastUpdated = DateTime.Now, City = "Ha Noi",
                     Type = "18k"
                 }
             );

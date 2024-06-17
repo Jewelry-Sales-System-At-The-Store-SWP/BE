@@ -60,7 +60,7 @@ public class GoldPriceService(IGoldPriceRepository goldPriceRepository,IMapper m
                     // Create new gold price
                     var newGoldPrice = new Gold
                     {
-                        GoldPriceId = IdGenerator.GenerateId(),
+                        GoldId = IdGenerator.GenerateId(),
                         City = city,
                         BuyPrice = float.Parse(buyPrice),
                         SellPrice = float.Parse(sellPrice),
