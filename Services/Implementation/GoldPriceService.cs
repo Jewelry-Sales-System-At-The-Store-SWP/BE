@@ -58,7 +58,7 @@ public class GoldPriceService(IGoldPriceRepository goldPriceRepository,IMapper m
                 else
                 {
                     // Create new gold price
-                    var newGoldPrice = new GoldPrice
+                    var newGoldPrice = new Gold
                     {
                         GoldPriceId = IdGenerator.GenerateId(),
                         City = city,

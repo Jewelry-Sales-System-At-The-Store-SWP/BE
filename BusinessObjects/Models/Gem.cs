@@ -1,6 +1,6 @@
 ﻿namespace BusinessObjects.Models;
 
-public class StonePrice
+public class Gem
 {
     public required string StonePriceId { get; set; }
     public string? Type { get; set; }
@@ -11,5 +11,4 @@ public class StonePrice
     public DateTimeOffset LastUpdated { get; set; }
     
     public virtual ICollection<JewelryMaterial> JewelryMaterials { get; set; } = new List<JewelryMaterial>();
-    public virtual ICollection<StoneMasterPrice> StoneMasterPrices { get; set; } = new List<StoneMasterPrice>();
 }

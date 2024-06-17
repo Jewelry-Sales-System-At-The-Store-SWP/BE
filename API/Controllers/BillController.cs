@@ -11,7 +11,6 @@ public class BillController(IUserManagement userManagement) : ControllerBase
 {
     private IUserManagement UserManagement { get; } = userManagement;
     
-    [Authorize]
     [HttpGet("GetBills")]
     public async Task<IActionResult> Get()
     {
