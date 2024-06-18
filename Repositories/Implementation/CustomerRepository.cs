@@ -4,31 +4,34 @@ using Repositories.Interface;
 
 namespace Repositories.Implementation
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository(CustomerDao customerDao) : ICustomerRepository
     {
+        private CustomerDao CustomerDao { get; } = customerDao;
+
         public async Task<int> Create(Customer entity)
         {
-            return await CustomerDao.Instance.CreateCustomer(entity);
+            entity.Point = 0;
+            return await CustomerDao.CreateCustomer(entity);
         }
 
-        public Task<IEnumerable<Customer>> Find(Func<Customer, bool> predicate)
+        public async Task<IEnumerable<Customer>?> Gets()
         {
-            throw new NotImplementedException();
+            return await CustomerDao.GetCustomers();
         }
 
-        public async Task<IEnumerable<Customer?>?> Gets()
+        public async Task<Customer?> GetById(string id)
         {
-            return await CustomerDao.Instance.GetCustomers();
+            return await CustomerDao.GetCustomerById(id);
         }
 
-        public async Task<Customer?> GetById(int id)
+        public Task<int> Update(string id, Customer entity)
         {
-            return await CustomerDao.Instance.GetCustomerById(id);
+            return CustomerDao.UpdateCustomer(id, entity);
         }
 
-        public Task<int> Update(int id, Customer entity)
+        public async Task<int> Delete(string id)
         {
-            return CustomerDao.Instance.UpdateCustomer(id, entity);
+            return await CustomerDao.DeleteCustomer(id);
         }
     }
 }

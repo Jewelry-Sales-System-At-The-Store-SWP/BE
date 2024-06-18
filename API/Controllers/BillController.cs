@@ -1,4 +1,4 @@
-﻿using BusinessObjects.Dto.Bill;
+﻿using BusinessObjects.DTO.Bill;
 using Management.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +9,14 @@ namespace API.Controllers;
 public class BillController(IUserManagement userManagement) : ControllerBase
 {
     private IUserManagement UserManagement { get; } = userManagement;
-
     [HttpGet("GetBills")]
     public async Task<IActionResult> Get()
     {
         var bills = await UserManagement.GetBills();
         return Ok(bills);
     }
-    [HttpGet("GetBillById/{id:int}")]
-    public async Task<IActionResult> Get(int id)
+    [HttpGet("GetBillById/{id}")]
+    public async Task<IActionResult> Get(string id)
     {
         var bill = await UserManagement.GetBillById(id);
         if (bill == null) return NotFound();

@@ -2,19 +2,20 @@
 
 public class JewelryMaterial
 {
-    public int JewelryMaterialId { get; set; }
-    public int JewelryId { get; set; }
+    public required string JewelryMaterialId { get; set; }
+    public string? JewelryId { get; set; }
     
-    public int GoldPriceId { get; set; }
+    public string? GoldPriceId { get; set; }
     
-    public int StonePriceId { get; set; }
+    public string? StonePriceId { get; set; }
     
     public float GoldQuantity { get; set; }
     
     public float StoneQuantity { get; set; }
     
-    public virtual StonePrice? StonePrice { get; set; }
-    
-    public virtual GoldPrice? GoldPrice { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
+    public DateTimeOffset UpdatedAt { get; set; }
+    public virtual Gem? StonePrice { get; set; }
+    public virtual Gold? GoldPrice { get; set; }
     public virtual Jewelry? Jewelry { get; set; }
 }

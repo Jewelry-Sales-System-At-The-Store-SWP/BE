@@ -17,9 +17,10 @@ namespace BusinessObjects.Migrations
                 name: "Counters",
                 columns: table => new
                 {
-                    CounterId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Number = table.Column<int>(type: "int", nullable: true)
+                    CounterId = table.Column<string>(type: "varchar(20)", nullable: false),
+                    Number = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,12 +31,13 @@ namespace BusinessObjects.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<string>(type: "varchar(20)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Point = table.Column<int>(type: "int", nullable: true)
+                    Point = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,28 +45,42 @@ namespace BusinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GoldPrices",
+                name: "Gems",
                 columns: table => new
                 {
-                    GoldPriceId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GemId = table.Column<string>(type: "varchar(20)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BuyPrice = table.Column<float>(type: "real", nullable: false),
                     SellPrice = table.Column<float>(type: "real", nullable: false),
-                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    LastUpdated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GoldPrices", x => x.GoldPriceId);
+                    table.PrimaryKey("PK_Gems", x => x.GemId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Golds",
+                columns: table => new
+                {
+                    GoldId = table.Column<string>(type: "varchar(20)", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BuyPrice = table.Column<float>(type: "real", nullable: false),
+                    SellPrice = table.Column<float>(type: "real", nullable: false),
+                    LastUpdated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Golds", x => x.GoldId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "JewelryTypes",
                 columns: table => new
                 {
-                    JewelryTypeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    JewelryTypeId = table.Column<string>(type: "varchar(20)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -76,14 +92,13 @@ namespace BusinessObjects.Migrations
                 name: "Promotions",
                 columns: table => new
                 {
-                    PromotionId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PromotionId = table.Column<string>(type: "varchar(20)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ApproveManager = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DiscountRate = table.Column<double>(type: "float", nullable: true),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    StartDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    EndDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,8 +109,7 @@ namespace BusinessObjects.Migrations
                 name: "Roles",
                 columns: table => new
                 {
-                    RoleId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<string>(type: "varchar(20)", nullable: false),
                     RoleName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -104,33 +118,17 @@ namespace BusinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StonePrices",
-                columns: table => new
-                {
-                    StonePriceId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BuyPrice = table.Column<float>(type: "real", nullable: false),
-                    SellPrice = table.Column<float>(type: "real", nullable: false),
-                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StonePrices", x => x.StonePriceId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Jewelries",
                 columns: table => new
                 {
-                    JewelryId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    JewelryTypeId = table.Column<int>(type: "int", nullable: false),
+                    JewelryId = table.Column<string>(type: "varchar(20)", nullable: false),
+                    JewelryTypeId = table.Column<string>(type: "varchar(20)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Barcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LaborCost = table.Column<double>(type: "float", nullable: true),
-                    IsSold = table.Column<bool>(type: "bit", nullable: true)
+                    IsSold = table.Column<bool>(type: "bit", nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -146,14 +144,18 @@ namespace BusinessObjects.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<int>(type: "int", nullable: true),
-                    CounterId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "varchar(20)", nullable: false),
+                    RoleId = table.Column<string>(type: "varchar(20)", nullable: true),
+                    CounterId = table.Column<string>(type: "varchar(20)", nullable: true),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<bool>(type: "bit", nullable: false)
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -171,74 +173,46 @@ namespace BusinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MasterPrices",
-                columns: table => new
-                {
-                    MasterPriceId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StonePriceId = table.Column<int>(type: "int", nullable: false),
-                    GoldPriceId = table.Column<int>(type: "int", nullable: false),
-                    GoldStorePrice = table.Column<float>(type: "real", nullable: false),
-                    StoneStorePrice = table.Column<float>(type: "real", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MasterPrices", x => x.MasterPriceId);
-                    table.ForeignKey(
-                        name: "FK_MasterPrices_GoldPrices_GoldPriceId",
-                        column: x => x.GoldPriceId,
-                        principalTable: "GoldPrices",
-                        principalColumn: "GoldPriceId");
-                    table.ForeignKey(
-                        name: "FK_MasterPrices_StonePrices_StonePriceId",
-                        column: x => x.StonePriceId,
-                        principalTable: "StonePrices",
-                        principalColumn: "StonePriceId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "JewelryMaterials",
                 columns: table => new
                 {
-                    JewelryMaterialId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    JewelryId = table.Column<int>(type: "int", nullable: false),
-                    GoldPriceId = table.Column<int>(type: "int", nullable: false),
-                    StonePriceId = table.Column<int>(type: "int", nullable: false),
+                    JewelryMaterialId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    JewelryId = table.Column<string>(type: "varchar(20)", nullable: true),
+                    GoldPriceId = table.Column<string>(type: "varchar(20)", nullable: true),
+                    StonePriceId = table.Column<string>(type: "varchar(20)", nullable: true),
                     GoldQuantity = table.Column<float>(type: "real", nullable: false),
-                    StoneQuantity = table.Column<float>(type: "real", nullable: false)
+                    StoneQuantity = table.Column<float>(type: "real", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_JewelryMaterials", x => x.JewelryMaterialId);
                     table.ForeignKey(
-                        name: "FK_JewelryMaterials_GoldPrices_GoldPriceId",
+                        name: "FK_JewelryMaterials_Gems_StonePriceId",
+                        column: x => x.StonePriceId,
+                        principalTable: "Gems",
+                        principalColumn: "GemId");
+                    table.ForeignKey(
+                        name: "FK_JewelryMaterials_Golds_GoldPriceId",
                         column: x => x.GoldPriceId,
-                        principalTable: "GoldPrices",
-                        principalColumn: "GoldPriceId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalTable: "Golds",
+                        principalColumn: "GoldId");
                     table.ForeignKey(
                         name: "FK_JewelryMaterials_Jewelries_JewelryId",
                         column: x => x.JewelryId,
                         principalTable: "Jewelries",
                         principalColumn: "JewelryId");
-                    table.ForeignKey(
-                        name: "FK_JewelryMaterials_StonePrices_StonePriceId",
-                        column: x => x.StonePriceId,
-                        principalTable: "StonePrices",
-                        principalColumn: "StonePriceId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Warranties",
                 columns: table => new
                 {
-                    WarrantyId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    JewelryId = table.Column<int>(type: "int", nullable: false),
+                    WarrantyId = table.Column<string>(type: "varchar(20)", nullable: false),
+                    JewelryId = table.Column<string>(type: "varchar(20)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    EndDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -254,13 +228,14 @@ namespace BusinessObjects.Migrations
                 name: "Bills",
                 columns: table => new
                 {
-                    BillId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    CounterId = table.Column<int>(type: "int", nullable: true),
+                    BillId = table.Column<string>(type: "varchar(20)", nullable: false),
+                    CustomerId = table.Column<string>(type: "varchar(20)", nullable: true),
+                    UserId = table.Column<string>(type: "varchar(20)", nullable: true),
+                    CounterId = table.Column<string>(type: "varchar(20)", nullable: true),
                     TotalAmount = table.Column<double>(type: "float", nullable: true),
-                    SaleDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    SaleDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -286,12 +261,11 @@ namespace BusinessObjects.Migrations
                 name: "Purchases",
                 columns: table => new
                 {
-                    PurchaseId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    JewelryId = table.Column<int>(type: "int", nullable: true),
-                    PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    PurchaseId = table.Column<string>(type: "varchar(20)", nullable: false),
+                    CustomerId = table.Column<string>(type: "varchar(20)", nullable: true),
+                    UserId = table.Column<string>(type: "varchar(20)", nullable: true),
+                    JewelryId = table.Column<string>(type: "varchar(20)", nullable: true),
+                    PurchaseDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     PurchasePrice = table.Column<double>(type: "float", nullable: true),
                     IsBuyBack = table.Column<int>(type: "int", nullable: true)
                 },
@@ -319,10 +293,11 @@ namespace BusinessObjects.Migrations
                 name: "BillJewelries",
                 columns: table => new
                 {
-                    BillJewelryId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BillId = table.Column<int>(type: "int", nullable: true),
-                    JewelryId = table.Column<int>(type: "int", nullable: true)
+                    BillJewelryId = table.Column<string>(type: "varchar(20)", nullable: false),
+                    BillId = table.Column<string>(type: "varchar(20)", nullable: true),
+                    JewelryId = table.Column<string>(type: "varchar(20)", nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -343,10 +318,11 @@ namespace BusinessObjects.Migrations
                 name: "BillPromotions",
                 columns: table => new
                 {
-                    BillPromotionId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BillId = table.Column<int>(type: "int", nullable: true),
-                    PromotionId = table.Column<int>(type: "int", nullable: true)
+                    BillPromotionId = table.Column<string>(type: "varchar(20)", nullable: false),
+                    BillId = table.Column<string>(type: "varchar(20)", nullable: true),
+                    PromotionId = table.Column<string>(type: "varchar(20)", nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -365,32 +341,42 @@ namespace BusinessObjects.Migrations
 
             migrationBuilder.InsertData(
                 table: "Counters",
-                columns: new[] { "CounterId", "Number" },
+                columns: new[] { "CounterId", "CreatedAt", "Number", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, 312 },
-                    { 2, 231 },
-                    { 3, 431 }
+                    { "1", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), 312, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { "2", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), 231, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { "3", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), 431, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "CustomerId", "Address", "Name", "Phone", "Point" },
+                columns: new[] { "CustomerId", "Address", "CreatedAt", "Name", "Phone", "Point", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "Ha Noi", "Nguyen Van A", "0123456789", null },
-                    { 2, "Ha Noi", "Nguyen Van B", "0123456789", null },
-                    { 3, "Ha Noi", "Nguyen Van C", "0123456789", null }
+                    { "1", "Ha Noi", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Nguyen Van A", "0123456789", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { "2", "Ha Noi", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Nguyen Van B", "0123456789", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { "3", "Ha Noi", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Nguyen Van C", "0123456789", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) }
                 });
 
             migrationBuilder.InsertData(
-                table: "GoldPrices",
-                columns: new[] { "GoldPriceId", "BuyPrice", "City", "LastUpdated", "SellPrice", "Type" },
+                table: "Gems",
+                columns: new[] { "GemId", "BuyPrice", "City", "LastUpdated", "SellPrice", "Type" },
                 values: new object[,]
                 {
-                    { 1, 1000f, "Ha Noi", new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9423), 1200f, "9999" },
-                    { 2, 1200f, "Ha Noi", new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9425), 1400f, "SCJ" },
-                    { 3, 1400f, "Ha Noi", new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9426), 1600f, "18k" }
+                    { "1", 300f, "Ha Noi", new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7083), new TimeSpan(0, 7, 0, 0, 0)), 400f, "Ruby" },
+                    { "2", 400f, "Ha Noi", new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7086), new TimeSpan(0, 7, 0, 0, 0)), 500f, "Sapphire" },
+                    { "3", 500f, "Ha Noi", new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7087), new TimeSpan(0, 7, 0, 0, 0)), 600f, "Emerald" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Golds",
+                columns: new[] { "GoldId", "BuyPrice", "City", "LastUpdated", "SellPrice", "Type" },
+                values: new object[,]
+                {
+                    { "1", 1000f, "Ha Noi", new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7108), new TimeSpan(0, 7, 0, 0, 0)), 1200f, "9999" },
+                    { "2", 1200f, "Ha Noi", new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7110), new TimeSpan(0, 7, 0, 0, 0)), 1400f, "SCJ" },
+                    { "3", 1400f, "Ha Noi", new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7112), new TimeSpan(0, 7, 0, 0, 0)), 1600f, "18k" }
                 });
 
             migrationBuilder.InsertData(
@@ -398,9 +384,9 @@ namespace BusinessObjects.Migrations
                 columns: new[] { "JewelryTypeId", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Vong tay" },
-                    { 2, "Nhan" },
-                    { 3, "Day chuyen" }
+                    { "1", "Vong tay" },
+                    { "2", "Nhan" },
+                    { "3", "Day chuyen" }
                 });
 
             migrationBuilder.InsertData(
@@ -408,9 +394,9 @@ namespace BusinessObjects.Migrations
                 columns: new[] { "PromotionId", "ApproveManager", "Description", "DiscountRate", "EndDate", "StartDate", "Type" },
                 values: new object[,]
                 {
-                    { 1, null, "Giam gia 10%", 1.0, new DateTime(2024, 6, 19, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9296), new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9286), "Giam gia" },
-                    { 2, null, "Giam gia 20%", 2.0, new DateTime(2024, 6, 19, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9301), new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9301), "Giam gia" },
-                    { 3, null, "Giam gia 30%", 3.0, new DateTime(2024, 6, 19, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9303), new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9303), "Giam gia" }
+                    { "1", null, "Giam gia 10%", 1.0, new DateTimeOffset(new DateTime(2024, 6, 28, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(6997), new TimeSpan(0, 7, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(6967), new TimeSpan(0, 7, 0, 0, 0)), "Giam gia" },
+                    { "2", null, "Giam gia 20%", 2.0, new DateTimeOffset(new DateTime(2024, 6, 28, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7003), new TimeSpan(0, 7, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7002), new TimeSpan(0, 7, 0, 0, 0)), "Giam gia" },
+                    { "3", null, "Giam gia 30%", 3.0, new DateTimeOffset(new DateTime(2024, 6, 28, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7006), new TimeSpan(0, 7, 0, 0, 0)), new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7005), new TimeSpan(0, 7, 0, 0, 0)), "Giam gia" }
                 });
 
             migrationBuilder.InsertData(
@@ -418,49 +404,46 @@ namespace BusinessObjects.Migrations
                 columns: new[] { "RoleId", "RoleName" },
                 values: new object[,]
                 {
-                    { 1, "Admin" },
-                    { 2, "Manager" },
-                    { 3, "Staff" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "StonePrices",
-                columns: new[] { "StonePriceId", "BuyPrice", "City", "LastUpdated", "SellPrice", "Type" },
-                values: new object[,]
-                {
-                    { 1, 300f, "Ha Noi", new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9398), 400f, "Ruby" },
-                    { 2, 400f, "Ha Noi", new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9400), 500f, "Sapphire" },
-                    { 3, 500f, "Ha Noi", new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9401), 600f, "Emerald" }
+                    { "1", "Admin" },
+                    { "2", "Manager" },
+                    { "3", "Staff" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Jewelries",
-                columns: new[] { "JewelryId", "Barcode", "IsSold", "JewelryTypeId", "LaborCost", "Name" },
+                columns: new[] { "JewelryId", "Barcode", "CreatedAt", "IsSold", "JewelryTypeId", "LaborCost", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "AVC131", true, 1, 312.0, "Vong tay" },
-                    { 2, "SAC132", false, 2, 231.0, "Nhan" },
-                    { 3, "SACC3", true, 3, 431.0, "Day chuyen" },
-                    { 4, "SFA131", true, 2, 552.0, "Vong tay Xanh" }
+                    { "1", "AVC131", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), true, "1", 312.0, "Vong tay", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { "2", "SAC132", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), false, "2", 231.0, "Nhan", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "CounterId", "Email", "Password", "RoleId", "Status", "Username" },
+                columns: new[] { "UserId", "CounterId", "CreatedAt", "Email", "FullName", "Gender", "Password", "PhoneNumber", "RoleId", "Status", "UpdatedAt", "Username" },
                 values: new object[,]
                 {
-                    { 1, 1, "nghialoe46a2gmail.com", "5678", 1, false, "admin Nghia" },
-                    { 2, 2, "JohnDoe@gmail.com", "1234", 2, false, "manager John Doe" },
-                    { 3, 3, "Chis@yahho.com", "4321", 3, false, "staff Chis Nguyen" }
+                    { "1", "1", null, "nghialoe46a2gmail.com", null, null, "5678", null, "1", false, null, "admin Nghia" },
+                    { "2", "2", null, "JohnDoe@gmail.com", null, null, "1234", null, "2", false, null, "manager John Doe" },
+                    { "3", "3", null, "Chis@yahho.com", null, null, "4321", null, "3", false, null, "staff Chis Nguyen" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Bills",
-                columns: new[] { "BillId", "CounterId", "CustomerId", "SaleDate", "TotalAmount", "UserId" },
+                columns: new[] { "BillId", "CounterId", "CreatedAt", "CustomerId", "SaleDate", "TotalAmount", "UpdatedAt", "UserId" },
                 values: new object[,]
                 {
-                    { 1, null, 1, new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9326), 500.0, 1 },
-                    { 2, null, 2, new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9328), 1200.0, 2 }
+                    { "1", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "1", new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7028), new TimeSpan(0, 7, 0, 0, 0)), 500.0, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "1" },
+                    { "2", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "2", new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7030), new TimeSpan(0, 7, 0, 0, 0)), 1200.0, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "2" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "JewelryMaterials",
+                columns: new[] { "JewelryMaterialId", "CreatedAt", "GoldPriceId", "GoldQuantity", "JewelryId", "StonePriceId", "StoneQuantity", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { "1", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "1", 30f, "1", "1", 1f, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { "2", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "2", 20f, "2", "2", 1f, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) }
                 });
 
             migrationBuilder.InsertData(
@@ -468,28 +451,26 @@ namespace BusinessObjects.Migrations
                 columns: new[] { "PurchaseId", "CustomerId", "IsBuyBack", "JewelryId", "PurchaseDate", "PurchasePrice", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, 0, 1, new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9445), 500.0, 1 },
-                    { 2, 2, 1, 2, new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9447), 300.0, 1 },
-                    { 3, 2, 0, 3, new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9449), 1000.0, 1 }
+                    { "1", "1", 0, "1", new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7138), new TimeSpan(0, 7, 0, 0, 0)), 500.0, "1" },
+                    { "2", "2", 1, "2", new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7141), new TimeSpan(0, 7, 0, 0, 0)), 300.0, "1" }
                 });
 
             migrationBuilder.InsertData(
                 table: "BillJewelries",
-                columns: new[] { "BillJewelryId", "BillId", "JewelryId" },
+                columns: new[] { "BillJewelryId", "BillId", "CreatedAt", "JewelryId", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, 1, 1 },
-                    { 2, 1, 2 },
-                    { 3, 2, 3 }
+                    { "1", "1", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "1", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { "2", "1", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "2", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) }
                 });
 
             migrationBuilder.InsertData(
                 table: "BillPromotions",
-                columns: new[] { "BillPromotionId", "BillId", "PromotionId" },
+                columns: new[] { "BillPromotionId", "BillId", "CreatedAt", "PromotionId", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, 1, 1 },
-                    { 2, 2, 1 }
+                    { "1", "1", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "1", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { "2", "2", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "1", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -548,16 +529,6 @@ namespace BusinessObjects.Migrations
                 column: "StonePriceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MasterPrices_GoldPriceId",
-                table: "MasterPrices",
-                column: "GoldPriceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MasterPrices_StonePriceId",
-                table: "MasterPrices",
-                column: "StonePriceId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Purchases_CustomerId",
                 table: "Purchases",
                 column: "CustomerId");
@@ -586,7 +557,8 @@ namespace BusinessObjects.Migrations
                 name: "IX_Warranties_JewelryId",
                 table: "Warranties",
                 column: "JewelryId",
-                unique: true);
+                unique: true,
+                filter: "[JewelryId] IS NOT NULL");
         }
 
         /// <inheritdoc />
@@ -602,9 +574,6 @@ namespace BusinessObjects.Migrations
                 name: "JewelryMaterials");
 
             migrationBuilder.DropTable(
-                name: "MasterPrices");
-
-            migrationBuilder.DropTable(
                 name: "Purchases");
 
             migrationBuilder.DropTable(
@@ -617,10 +586,10 @@ namespace BusinessObjects.Migrations
                 name: "Promotions");
 
             migrationBuilder.DropTable(
-                name: "GoldPrices");
+                name: "Gems");
 
             migrationBuilder.DropTable(
-                name: "StonePrices");
+                name: "Golds");
 
             migrationBuilder.DropTable(
                 name: "Jewelries");

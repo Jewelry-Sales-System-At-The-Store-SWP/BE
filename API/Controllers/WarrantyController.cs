@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BusinessObjects.Dto;
+using BusinessObjects.DTO;
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interface;
@@ -13,26 +13,26 @@ public class WarrantyController(IWarrantyService warrantyService, IMapper mapper
     private IWarrantyService WarrantyService { get; } = warrantyService;
     public IMapper Mapper { get; } = mapper;
 
-    [HttpGet("Get Warranties")]
+    [HttpGet("GetWarranties")]
     public async Task<IActionResult> Get()
     {
         var warranties = await WarrantyService.GetWarranties();
         return Ok(warranties);
     }
     [HttpGet("GetWarrantyById/{id}")]
-    public async Task<IActionResult> Get(int id)
+    public async Task<IActionResult> Get(string id)
     {
         var warranty = await WarrantyService.GetWarrantyById(id);
         return Ok(warranty);
     }
-    [HttpPost("Create Warranty")]
+    [HttpPost("CreateWarranty")]
     public async Task<IActionResult> CreateWarranty(WarrantyDto warrantyDto)
     {
         var result = await WarrantyService.CreateWarranty(warrantyDto);
         return Ok(result);
     }
-    [HttpPut("Update Warranty/{id}")]
-    public async Task<IActionResult> UpdateWarranty([FromQuery]int id,WarrantyDto warrantyDto)
+    [HttpPut("UpdateWarranty/{id}")]
+    public async Task<IActionResult> UpdateWarranty(string id,WarrantyDto warrantyDto)
     {
         var result = await WarrantyService.UpdateWarranty(id ,warrantyDto);
         return Ok(result);

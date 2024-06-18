@@ -1,19 +1,26 @@
-﻿using BusinessObjects.Dto;
-using BusinessObjects.Dto.Bill;
+﻿using BusinessObjects.DTO;
+using BusinessObjects.DTO.Bill;
+using BusinessObjects.DTO.BillReqRes;
+using BusinessObjects.DTO.ResponseDto;
 using BusinessObjects.Models;
 using Management.Interface;
 using Services.Interface;
 
 namespace Management.Implementation
 {
-    public class UserManagement(IUserService userService, IBillService billService) : IUserManagement
+    public class UserManagement(IJewelryService jewelryService,IUserService userService, IBillService billService, ITokenService tokenService) : IUserManagement
     {
+        public IJewelryService JewelryService { get; } = jewelryService;
         private IUserService UserService { get; } = userService;
         private IBillService BillService { get; } = billService;
+        private ITokenService TokenService { get; } = tokenService;
 
-        public async Task<User?> Login(LoginDto loginDto)
+        public async Task<TokenResponseDto?> Login(LoginDto loginDto)
         {
-            return await UserService.Login(loginDto);
+            var user = await UserService.Login(loginDto);
+            if (user == null) return null;
+            var token = await TokenService.CreateToken(user);
+            return token;
         }
 
         public async Task<IEnumerable<User?>?> GetUsers()
@@ -21,22 +28,22 @@ namespace Management.Implementation
             return await UserService.GetUsers();
         }
 
-        public async Task<IEnumerable<Bill?>?> GetBills()
+        public async Task<IEnumerable<BillDetailDto?>?> GetBills()
         {
             return await BillService.GetBills();
         }
 
-        public async Task<Bill?> GetBillById(int id)
+        public async Task<BillDetailDto?> GetBillById(string id)
         {
             return await BillService.GetById(id);
         }
-
+        
         public async Task<BillResponseDto> CreateBill(BillRequestDto billRequestDto)
         {
             return await BillService.Create(billRequestDto);
         }
 
-        public async Task<User?> GetUserById(int id)
+        public async Task<User?> GetUserById(string id)
         {
             return await UserService.GetUserById(id);
         }
@@ -46,9 +53,14 @@ namespace Management.Implementation
             return await UserService.AddUser(userDto);
         }
 
-        public async Task<int> UpdateUser(int id, UserDto user)
+        public async Task<int> UpdateUser(string id, UserDto user)
         {
             return await UserService.UpdateUser(id, user);
+        }
+
+        public async Task<int> DeleteUser(string id)
+        {
+            return await UserService.DeleteUser(id);
         }
     }
 }

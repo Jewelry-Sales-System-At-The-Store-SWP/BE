@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BusinessObjects.Dto;
+using BusinessObjects.DTO;
 using BusinessObjects.Models;
 using Repositories.Interface;
 using Services.Interface;
@@ -13,7 +13,8 @@ namespace Services.Implementation
 
         public async Task<User?> Login(LoginDto loginDto)
         {
-            return await UserRepository.GetUser(loginDto.Email ?? "", loginDto.Password ?? "");
+            var user = await UserRepository.GetUser(loginDto.Email ?? "", loginDto.Password ?? "");
+            return user ?? null;
         }
 
         public async Task<IEnumerable<User?>?> GetUsers()
@@ -21,13 +22,13 @@ namespace Services.Implementation
             return await UserRepository.Gets();
         }
 
-        public async Task<bool> IsUser(string email, string password)
+        public async Task<bool> IsUser(LoginDto loginDto)
         {
-            var users = await UserRepository.Find(a => a.Email == email && a.Password == password);
+            var users = await UserRepository.Find(a => a.Email == loginDto.Email && a.Password == loginDto.Password);
             return users.Any();
         }
         
-        public async Task<int> UpdateUser(int id, UserDto userDto)
+        public async Task<int> UpdateUser(string id, UserDto userDto)
         {
             var user = Mapper.Map<User>(userDto);
             return await UserRepository.Update(id, user);
@@ -39,9 +40,14 @@ namespace Services.Implementation
             return await UserRepository.Create(user);
         }
 
-        public Task<User?> GetUserById(int id)
+        public Task<User?> GetUserById(string id)
         {
             return UserRepository.GetById(id);
+        }
+
+        public Task<int> DeleteUser(string id)
+        {
+            return UserRepository.Delete(id);
         }
     }
 }

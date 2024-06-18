@@ -1,12 +1,10 @@
-﻿namespace BusinessObjects.Dto;
+﻿namespace BusinessObjects.DTO;
 
 public class UserDto
 {
 
-    public int? RoleId { get; set; }
-
-    public int? CounterId { get; set; }
-
+    public string? RoleId { get; set; }
+    
     public string? Username { get; set; }
 
     public string? Email { get; set; }

@@ -4,9 +4,10 @@ using Repositories.Interface;
 
 namespace Repositories.Implementation
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository(UserDao userDao, RoleDao roleDao) : IUserRepository
     {
-        
+        public UserDao UserDao { get; } = userDao;
+        public RoleDao RoleDao { get; } = roleDao;
 
         public Task<IEnumerable<User>> Find(Func<User, bool> predicate)
         {
@@ -15,27 +16,44 @@ namespace Repositories.Implementation
 
         public async Task<User?> GetUser(string email, string password)
         {
-            return await UserDao.Instance.GetUser(email, password);
+            var user = await UserDao.GetUser(email, password);
+            if (user == null) return null;
+            var role = await RoleDao.GetRoleById(user.RoleId);
+            user.Role = role;
+            return user;
         }
 
-        public async Task<User?> GetById(int id)
+        public async Task<User?> GetById(string id)
         {
-            return await UserDao.Instance.GetUserById(id);
+            var user = await UserDao.GetUserById(id);
+            var role = await RoleDao.GetRoleById(user.RoleId);
+            user.Role = role;
+            return user;
         }
 
-        public async Task<int> Update(int id, User entity)
+        public async Task<int> Update(string id, User entity)
         {
-           return await UserDao.Instance.UpdateUser(id, entity);
+           return await UserDao.UpdateUser(id, entity);
         }
 
         public async Task<IEnumerable<User?>?> Gets()
         {
-            return await UserDao.Instance.GetUsers();
+            var users = await UserDao.GetUsers();
+            foreach (var user in users)
+            {
+                var userRole = await RoleDao.GetRoleById(user.RoleId);
+                user.Role = userRole;
+            }
+            return users;
         }
 
         public async Task<int> Create(User entity)
         {
-            return await UserDao.Instance.CreateUser(entity);
+            return await UserDao.CreateUser(entity);
+        }
+        public async Task<int> Delete(string id)
+        {
+            return await UserDao.DeleteUser(id);
         }
     }
 }

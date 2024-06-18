@@ -24,26 +24,29 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Models.Bill", b =>
                 {
-                    b.Property<int>("BillId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("BillId")
+                        .HasColumnType("varchar(20)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillId"));
+                    b.Property<string>("CounterId")
+                        .HasColumnType("varchar(20)");
 
-                    b.Property<int?>("CounterId")
-                        .HasColumnType("int");
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("varchar(20)");
 
-                    b.Property<DateTime?>("SaleDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("SaleDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<double?>("TotalAmount")
                         .HasColumnType("float");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("BillId");
 
@@ -58,35 +61,42 @@ namespace BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            BillId = 1,
-                            CustomerId = 1,
-                            SaleDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9326),
+                            BillId = "1",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            CustomerId = "1",
+                            SaleDate = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7028), new TimeSpan(0, 7, 0, 0, 0)),
                             TotalAmount = 500.0,
-                            UserId = 1
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserId = "1"
                         },
                         new
                         {
-                            BillId = 2,
-                            CustomerId = 2,
-                            SaleDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9328),
+                            BillId = "2",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            CustomerId = "2",
+                            SaleDate = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7030), new TimeSpan(0, 7, 0, 0, 0)),
                             TotalAmount = 1200.0,
-                            UserId = 2
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserId = "2"
                         });
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.BillJewelry", b =>
                 {
-                    b.Property<int>("BillJewelryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("BillJewelryId")
+                        .HasColumnType("varchar(20)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillJewelryId"));
+                    b.Property<string>("BillId")
+                        .HasColumnType("varchar(20)");
 
-                    b.Property<int?>("BillId")
-                        .HasColumnType("int");
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<int?>("JewelryId")
-                        .HasColumnType("int");
+                    b.Property<string>("JewelryId")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("BillJewelryId");
 
@@ -99,37 +109,38 @@ namespace BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            BillJewelryId = 1,
-                            BillId = 1,
-                            JewelryId = 1
+                            BillJewelryId = "1",
+                            BillId = "1",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            JewelryId = "1",
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
-                            BillJewelryId = 2,
-                            BillId = 1,
-                            JewelryId = 2
-                        },
-                        new
-                        {
-                            BillJewelryId = 3,
-                            BillId = 2,
-                            JewelryId = 3
+                            BillJewelryId = "2",
+                            BillId = "1",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            JewelryId = "2",
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.BillPromotion", b =>
                 {
-                    b.Property<int>("BillPromotionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("BillPromotionId")
+                        .HasColumnType("varchar(20)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillPromotionId"));
+                    b.Property<string>("BillId")
+                        .HasColumnType("varchar(20)");
 
-                    b.Property<int?>("BillId")
-                        .HasColumnType("int");
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<int?>("PromotionId")
-                        .HasColumnType("int");
+                    b.Property<string>("PromotionId")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("BillPromotionId");
 
@@ -142,28 +153,35 @@ namespace BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            BillPromotionId = 1,
-                            BillId = 1,
-                            PromotionId = 1
+                            BillPromotionId = "1",
+                            BillId = "1",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            PromotionId = "1",
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
-                            BillPromotionId = 2,
-                            BillId = 2,
-                            PromotionId = 1
+                            BillPromotionId = "2",
+                            BillId = "2",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            PromotionId = "1",
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.Counter", b =>
                 {
-                    b.Property<int>("CounterId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("CounterId")
+                        .HasColumnType("varchar(20)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CounterId"));
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int?>("Number")
                         .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("CounterId");
 
@@ -172,31 +190,37 @@ namespace BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            CounterId = 1,
-                            Number = 312
+                            CounterId = "1",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Number = 312,
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
-                            CounterId = 2,
-                            Number = 231
+                            CounterId = "2",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Number = 231,
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
-                            CounterId = 3,
-                            Number = 431
+                            CounterId = "3",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Number = 431,
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.Customer", b =>
                 {
-                    b.Property<int>("CustomerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -207,6 +231,9 @@ namespace BusinessObjects.Migrations
                     b.Property<int?>("Point")
                         .HasColumnType("int");
 
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
                     b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
@@ -214,34 +241,37 @@ namespace BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            CustomerId = 1,
+                            CustomerId = "1",
                             Address = "Ha Noi",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Nguyen Van A",
-                            Phone = "0123456789"
+                            Phone = "0123456789",
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
-                            CustomerId = 2,
+                            CustomerId = "2",
                             Address = "Ha Noi",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Nguyen Van B",
-                            Phone = "0123456789"
+                            Phone = "0123456789",
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
-                            CustomerId = 3,
+                            CustomerId = "3",
                             Address = "Ha Noi",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Nguyen Van C",
-                            Phone = "0123456789"
+                            Phone = "0123456789",
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });
 
-            modelBuilder.Entity("BusinessObjects.Models.GoldPrice", b =>
+            modelBuilder.Entity("BusinessObjects.Models.Gem", b =>
                 {
-                    b.Property<int>("GoldPriceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GoldPriceId"));
+                    b.Property<string>("GemId")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<float>("BuyPrice")
                         .HasColumnType("real");
@@ -249,8 +279,8 @@ namespace BusinessObjects.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("LastUpdated")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("LastUpdated")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<float>("SellPrice")
                         .HasColumnType("real");
@@ -258,35 +288,89 @@ namespace BusinessObjects.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("GoldPriceId");
+                    b.HasKey("GemId");
 
-                    b.ToTable("GoldPrices");
+                    b.ToTable("Gems");
 
                     b.HasData(
                         new
                         {
-                            GoldPriceId = 1,
+                            GemId = "1",
+                            BuyPrice = 300f,
+                            City = "Ha Noi",
+                            LastUpdated = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7083), new TimeSpan(0, 7, 0, 0, 0)),
+                            SellPrice = 400f,
+                            Type = "Ruby"
+                        },
+                        new
+                        {
+                            GemId = "2",
+                            BuyPrice = 400f,
+                            City = "Ha Noi",
+                            LastUpdated = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7086), new TimeSpan(0, 7, 0, 0, 0)),
+                            SellPrice = 500f,
+                            Type = "Sapphire"
+                        },
+                        new
+                        {
+                            GemId = "3",
+                            BuyPrice = 500f,
+                            City = "Ha Noi",
+                            LastUpdated = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7087), new TimeSpan(0, 7, 0, 0, 0)),
+                            SellPrice = 600f,
+                            Type = "Emerald"
+                        });
+                });
+
+            modelBuilder.Entity("BusinessObjects.Models.Gold", b =>
+                {
+                    b.Property<string>("GoldId")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<float>("BuyPrice")
+                        .HasColumnType("real");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("LastUpdated")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<float>("SellPrice")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GoldId");
+
+                    b.ToTable("Golds");
+
+                    b.HasData(
+                        new
+                        {
+                            GoldId = "1",
                             BuyPrice = 1000f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9423),
+                            LastUpdated = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7108), new TimeSpan(0, 7, 0, 0, 0)),
                             SellPrice = 1200f,
                             Type = "9999"
                         },
                         new
                         {
-                            GoldPriceId = 2,
+                            GoldId = "2",
                             BuyPrice = 1200f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9425),
+                            LastUpdated = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7110), new TimeSpan(0, 7, 0, 0, 0)),
                             SellPrice = 1400f,
                             Type = "SCJ"
                         },
                         new
                         {
-                            GoldPriceId = 3,
+                            GoldId = "3",
                             BuyPrice = 1400f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9426),
+                            LastUpdated = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7112), new TimeSpan(0, 7, 0, 0, 0)),
                             SellPrice = 1600f,
                             Type = "18k"
                         });
@@ -294,26 +378,29 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Models.Jewelry", b =>
                 {
-                    b.Property<int>("JewelryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JewelryId"));
+                    b.Property<string>("JewelryId")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Barcode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<bool?>("IsSold")
                         .HasColumnType("bit");
 
-                    b.Property<int>("JewelryTypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("JewelryTypeId")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<double?>("LaborCost")
                         .HasColumnType("float");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("JewelryId");
 
@@ -324,64 +411,53 @@ namespace BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            JewelryId = 1,
+                            JewelryId = "1",
                             Barcode = "AVC131",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsSold = true,
-                            JewelryTypeId = 1,
+                            JewelryTypeId = "1",
                             LaborCost = 312.0,
-                            Name = "Vong tay"
+                            Name = "Vong tay",
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
-                            JewelryId = 2,
+                            JewelryId = "2",
                             Barcode = "SAC132",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsSold = false,
-                            JewelryTypeId = 2,
+                            JewelryTypeId = "2",
                             LaborCost = 231.0,
-                            Name = "Nhan"
-                        },
-                        new
-                        {
-                            JewelryId = 3,
-                            Barcode = "SACC3",
-                            IsSold = true,
-                            JewelryTypeId = 3,
-                            LaborCost = 431.0,
-                            Name = "Day chuyen"
-                        },
-                        new
-                        {
-                            JewelryId = 4,
-                            Barcode = "SFA131",
-                            IsSold = true,
-                            JewelryTypeId = 2,
-                            LaborCost = 552.0,
-                            Name = "Vong tay Xanh"
+                            Name = "Nhan",
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.JewelryMaterial", b =>
                 {
-                    b.Property<int>("JewelryMaterialId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("JewelryMaterialId")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JewelryMaterialId"));
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("GoldPriceId")
-                        .HasColumnType("int");
+                    b.Property<string>("GoldPriceId")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<float>("GoldQuantity")
                         .HasColumnType("real");
 
-                    b.Property<int>("JewelryId")
-                        .HasColumnType("int");
+                    b.Property<string>("JewelryId")
+                        .HasColumnType("varchar(20)");
 
-                    b.Property<int>("StonePriceId")
-                        .HasColumnType("int");
+                    b.Property<string>("StonePriceId")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<float>("StoneQuantity")
                         .HasColumnType("real");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("JewelryMaterialId");
 
@@ -392,15 +468,36 @@ namespace BusinessObjects.Migrations
                     b.HasIndex("StonePriceId");
 
                     b.ToTable("JewelryMaterials");
+
+                    b.HasData(
+                        new
+                        {
+                            JewelryMaterialId = "1",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            GoldPriceId = "1",
+                            GoldQuantity = 30f,
+                            JewelryId = "1",
+                            StonePriceId = "1",
+                            StoneQuantity = 1f,
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            JewelryMaterialId = "2",
+                            CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            GoldPriceId = "2",
+                            GoldQuantity = 20f,
+                            JewelryId = "2",
+                            StonePriceId = "2",
+                            StoneQuantity = 1f,
+                            UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.JewelryType", b =>
                 {
-                    b.Property<int>("JewelryTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JewelryTypeId"));
+                    b.Property<string>("JewelryTypeId")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -412,57 +509,25 @@ namespace BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            JewelryTypeId = 1,
+                            JewelryTypeId = "1",
                             Name = "Vong tay"
                         },
                         new
                         {
-                            JewelryTypeId = 2,
+                            JewelryTypeId = "2",
                             Name = "Nhan"
                         },
                         new
                         {
-                            JewelryTypeId = 3,
+                            JewelryTypeId = "3",
                             Name = "Day chuyen"
                         });
                 });
 
-            modelBuilder.Entity("BusinessObjects.Models.MasterPrice", b =>
-                {
-                    b.Property<int>("MasterPriceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MasterPriceId"));
-
-                    b.Property<int>("GoldPriceId")
-                        .HasColumnType("int");
-
-                    b.Property<float>("GoldStorePrice")
-                        .HasColumnType("real");
-
-                    b.Property<int>("StonePriceId")
-                        .HasColumnType("int");
-
-                    b.Property<float>("StoneStorePrice")
-                        .HasColumnType("real");
-
-                    b.HasKey("MasterPriceId");
-
-                    b.HasIndex("GoldPriceId");
-
-                    b.HasIndex("StonePriceId");
-
-                    b.ToTable("MasterPrices");
-                });
-
             modelBuilder.Entity("BusinessObjects.Models.Promotion", b =>
                 {
-                    b.Property<int>("PromotionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PromotionId"));
+                    b.Property<string>("PromotionId")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("ApproveManager")
                         .HasColumnType("nvarchar(max)");
@@ -473,11 +538,11 @@ namespace BusinessObjects.Migrations
                     b.Property<double?>("DiscountRate")
                         .HasColumnType("float");
 
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("EndDate")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("StartDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
@@ -489,58 +554,55 @@ namespace BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            PromotionId = 1,
+                            PromotionId = "1",
                             Description = "Giam gia 10%",
                             DiscountRate = 1.0,
-                            EndDate = new DateTime(2024, 6, 19, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9296),
-                            StartDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9286),
+                            EndDate = new DateTimeOffset(new DateTime(2024, 6, 28, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(6997), new TimeSpan(0, 7, 0, 0, 0)),
+                            StartDate = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(6967), new TimeSpan(0, 7, 0, 0, 0)),
                             Type = "Giam gia"
                         },
                         new
                         {
-                            PromotionId = 2,
+                            PromotionId = "2",
                             Description = "Giam gia 20%",
                             DiscountRate = 2.0,
-                            EndDate = new DateTime(2024, 6, 19, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9301),
-                            StartDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9301),
+                            EndDate = new DateTimeOffset(new DateTime(2024, 6, 28, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7003), new TimeSpan(0, 7, 0, 0, 0)),
+                            StartDate = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7002), new TimeSpan(0, 7, 0, 0, 0)),
                             Type = "Giam gia"
                         },
                         new
                         {
-                            PromotionId = 3,
+                            PromotionId = "3",
                             Description = "Giam gia 30%",
                             DiscountRate = 3.0,
-                            EndDate = new DateTime(2024, 6, 19, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9303),
-                            StartDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9303),
+                            EndDate = new DateTimeOffset(new DateTime(2024, 6, 28, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7006), new TimeSpan(0, 7, 0, 0, 0)),
+                            StartDate = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7005), new TimeSpan(0, 7, 0, 0, 0)),
                             Type = "Giam gia"
                         });
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.Purchase", b =>
                 {
-                    b.Property<int>("PurchaseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("PurchaseId")
+                        .HasColumnType("varchar(20)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PurchaseId"));
-
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<int?>("IsBuyBack")
                         .HasColumnType("int");
 
-                    b.Property<int?>("JewelryId")
-                        .HasColumnType("int");
+                    b.Property<string>("JewelryId")
+                        .HasColumnType("varchar(20)");
 
-                    b.Property<DateTime?>("PurchaseDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("PurchaseDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<double?>("PurchasePrice")
                         .HasColumnType("float");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("PurchaseId");
 
@@ -555,43 +617,30 @@ namespace BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            PurchaseId = 1,
-                            CustomerId = 1,
+                            PurchaseId = "1",
+                            CustomerId = "1",
                             IsBuyBack = 0,
-                            JewelryId = 1,
-                            PurchaseDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9445),
+                            JewelryId = "1",
+                            PurchaseDate = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7138), new TimeSpan(0, 7, 0, 0, 0)),
                             PurchasePrice = 500.0,
-                            UserId = 1
+                            UserId = "1"
                         },
                         new
                         {
-                            PurchaseId = 2,
-                            CustomerId = 2,
+                            PurchaseId = "2",
+                            CustomerId = "2",
                             IsBuyBack = 1,
-                            JewelryId = 2,
-                            PurchaseDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9447),
+                            JewelryId = "2",
+                            PurchaseDate = new DateTimeOffset(new DateTime(2024, 6, 18, 13, 37, 45, 816, DateTimeKind.Unspecified).AddTicks(7141), new TimeSpan(0, 7, 0, 0, 0)),
                             PurchasePrice = 300.0,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            PurchaseId = 3,
-                            CustomerId = 2,
-                            IsBuyBack = 0,
-                            JewelryId = 3,
-                            PurchaseDate = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9449),
-                            PurchasePrice = 1000.0,
-                            UserId = 1
+                            UserId = "1"
                         });
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.Role", b =>
                 {
-                    b.Property<int>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
+                    b.Property<string>("RoleId")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("RoleName")
                         .HasColumnType("nvarchar(max)");
@@ -603,100 +652,55 @@ namespace BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            RoleId = 1,
+                            RoleId = "1",
                             RoleName = "Admin"
                         },
                         new
                         {
-                            RoleId = 2,
+                            RoleId = "2",
                             RoleName = "Manager"
                         },
                         new
                         {
-                            RoleId = 3,
+                            RoleId = "3",
                             RoleName = "Staff"
-                        });
-                });
-
-            modelBuilder.Entity("BusinessObjects.Models.StonePrice", b =>
-                {
-                    b.Property<int>("StonePriceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StonePriceId"));
-
-                    b.Property<float>("BuyPrice")
-                        .HasColumnType("real");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LastUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float>("SellPrice")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("StonePriceId");
-
-                    b.ToTable("StonePrices");
-
-                    b.HasData(
-                        new
-                        {
-                            StonePriceId = 1,
-                            BuyPrice = 300f,
-                            City = "Ha Noi",
-                            LastUpdated = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9398),
-                            SellPrice = 400f,
-                            Type = "Ruby"
-                        },
-                        new
-                        {
-                            StonePriceId = 2,
-                            BuyPrice = 400f,
-                            City = "Ha Noi",
-                            LastUpdated = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9400),
-                            SellPrice = 500f,
-                            Type = "Sapphire"
-                        },
-                        new
-                        {
-                            StonePriceId = 3,
-                            BuyPrice = 500f,
-                            City = "Ha Noi",
-                            LastUpdated = new DateTime(2024, 6, 9, 20, 12, 12, 69, DateTimeKind.Local).AddTicks(9401),
-                            SellPrice = 600f,
-                            Type = "Emerald"
                         });
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(20)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+                    b.Property<string>("CounterId")
+                        .HasColumnType("varchar(20)");
 
-                    b.Property<int?>("CounterId")
-                        .HasColumnType("int");
+                    b.Property<DateTimeOffset?>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RoleId")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
@@ -712,31 +716,31 @@ namespace BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = 1,
-                            CounterId = 1,
+                            UserId = "1",
+                            CounterId = "1",
                             Email = "nghialoe46a2gmail.com",
                             Password = "5678",
-                            RoleId = 1,
+                            RoleId = "1",
                             Status = false,
                             Username = "admin Nghia"
                         },
                         new
                         {
-                            UserId = 2,
-                            CounterId = 2,
+                            UserId = "2",
+                            CounterId = "2",
                             Email = "JohnDoe@gmail.com",
                             Password = "1234",
-                            RoleId = 2,
+                            RoleId = "2",
                             Status = false,
                             Username = "manager John Doe"
                         },
                         new
                         {
-                            UserId = 3,
-                            CounterId = 3,
+                            UserId = "3",
+                            CounterId = "3",
                             Email = "Chis@yahho.com",
                             Password = "4321",
-                            RoleId = 3,
+                            RoleId = "3",
                             Status = false,
                             Username = "staff Chis Nguyen"
                         });
@@ -744,25 +748,23 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Models.Warranty", b =>
                 {
-                    b.Property<int>("WarrantyId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WarrantyId"));
+                    b.Property<string>("WarrantyId")
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("EndDate")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("JewelryId")
-                        .HasColumnType("int");
+                    b.Property<string>("JewelryId")
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("WarrantyId");
 
                     b.HasIndex("JewelryId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[JewelryId] IS NOT NULL");
 
                     b.ToTable("Warranties");
                 });
@@ -830,54 +832,29 @@ namespace BusinessObjects.Migrations
                     b.HasOne("BusinessObjects.Models.JewelryType", "JewelryType")
                         .WithMany("Jewelries")
                         .HasForeignKey("JewelryTypeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("JewelryType");
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.JewelryMaterial", b =>
                 {
-                    b.HasOne("BusinessObjects.Models.GoldPrice", "GoldPrice")
+                    b.HasOne("BusinessObjects.Models.Gold", "GoldPrice")
                         .WithMany("JewelryMaterials")
-                        .HasForeignKey("GoldPriceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GoldPriceId");
 
                     b.HasOne("BusinessObjects.Models.Jewelry", "Jewelry")
                         .WithMany("JewelryMaterials")
                         .HasForeignKey("JewelryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("BusinessObjects.Models.StonePrice", "StonePrice")
+                    b.HasOne("BusinessObjects.Models.Gem", "StonePrice")
                         .WithMany("JewelryMaterials")
-                        .HasForeignKey("StonePriceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StonePriceId");
 
                     b.Navigation("GoldPrice");
 
                     b.Navigation("Jewelry");
-
-                    b.Navigation("StonePrice");
-                });
-
-            modelBuilder.Entity("BusinessObjects.Models.MasterPrice", b =>
-                {
-                    b.HasOne("BusinessObjects.Models.GoldPrice", "GoldPrice")
-                        .WithMany("MasterPrices")
-                        .HasForeignKey("GoldPriceId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("BusinessObjects.Models.StonePrice", "StonePrice")
-                        .WithMany("MasterPrices")
-                        .HasForeignKey("StonePriceId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("GoldPrice");
 
                     b.Navigation("StonePrice");
                 });
@@ -928,8 +905,7 @@ namespace BusinessObjects.Migrations
                     b.HasOne("BusinessObjects.Models.Jewelry", "Jewelry")
                         .WithOne("Warranty")
                         .HasForeignKey("BusinessObjects.Models.Warranty", "JewelryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Jewelry");
                 });
@@ -955,11 +931,14 @@ namespace BusinessObjects.Migrations
                     b.Navigation("Purchases");
                 });
 
-            modelBuilder.Entity("BusinessObjects.Models.GoldPrice", b =>
+            modelBuilder.Entity("BusinessObjects.Models.Gem", b =>
                 {
                     b.Navigation("JewelryMaterials");
+                });
 
-                    b.Navigation("MasterPrices");
+            modelBuilder.Entity("BusinessObjects.Models.Gold", b =>
+                {
+                    b.Navigation("JewelryMaterials");
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.Jewelry", b =>
@@ -986,13 +965,6 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.Role", b =>
                 {
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("BusinessObjects.Models.StonePrice", b =>
-                {
-                    b.Navigation("JewelryMaterials");
-
-                    b.Navigation("MasterPrices");
                 });
 
             modelBuilder.Entity("BusinessObjects.Models.User", b =>
