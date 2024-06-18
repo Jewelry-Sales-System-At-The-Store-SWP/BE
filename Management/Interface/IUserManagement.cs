@@ -9,15 +9,15 @@ namespace Management.Interface
     public interface IUserManagement
     {
         public Task<TokenResponseDto?> Login(LoginDto loginDto);
-        public Task<IEnumerable<User?>?> GetUsers();
+        //Bill
         public Task<IEnumerable<BillDetailDto?>?> GetBills();
         public Task<BillDetailDto?> GetBillById(string id);
         public Task<BillResponseDto> CreateBill(BillRequestDto billRequestDto);
-        
+        //Crud User
+        public Task<IEnumerable<User?>?> GetUsers();
         public Task<User?> GetUserById(string id);
         public Task<int> AddUser(UserDto userDto);
         public Task<int> UpdateUser(string id, UserDto userDto);
-        
         public Task<int> DeleteUser(string id);
     }
 }

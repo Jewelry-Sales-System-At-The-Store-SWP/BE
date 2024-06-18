@@ -1,4 +1,6 @@
-﻿namespace BusinessObjects.DTO.Bill
+﻿using BusinessObjects.DTO.Bill;
+
+namespace BusinessObjects.DTO.BillReqRes
 {
     public class BillResponseDto
     {

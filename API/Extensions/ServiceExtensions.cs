@@ -29,6 +29,7 @@ public static class ServiceExtensions
         serviceCollection.AddScoped<IBillPromotionRepository, BillPromotionRepository>();
         serviceCollection.AddScoped<IBillJewelryRepository, BillJewelryRepository>();
         serviceCollection.AddScoped<IBillDetailRepository, BillDetailRepository>();
+        serviceCollection.AddScoped<IJewelryMaterialRepository, JewelryMaterialRepository>();
         //Services
         serviceCollection.AddScoped<IGemPriceService, GemPriceService>();
         serviceCollection.AddScoped<IGoldPriceService, GoldPriceService>();
