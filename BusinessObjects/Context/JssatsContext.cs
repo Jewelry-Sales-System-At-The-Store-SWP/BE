@@ -18,9 +18,9 @@ namespace BusinessObjects.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(GetConnectionString());
+                //optionsBuilder.UseSqlServer(GetConnectionString());
                 //optionsBuilder.UseNpgsql(GetConnectionString());
-                //optionsBuilder.UseSqlServer("Server=(local);Uid=sa;Pwd=Abcd1234;Database=JSSATS;TrustServerCertificate=True");
+                optionsBuilder.UseSqlServer("Server=(local);Uid=sa;Pwd=Abcd1234;Database=JSSATS;TrustServerCertificate=True");
                 //optionsBuilder.UseNpgsql("Host=aws-0-ap-southeast-1.pooler.supabase.com; Database=postgres; Username=postgres.gfjsnspjzlcfdrzxxksm; Password=Akaka0406+++");
 
             }
@@ -288,9 +288,9 @@ namespace BusinessObjects.Context
             );
 
             modelBuilder.Entity<Customer>().HasData(
-                new Customer { CustomerId = "1", Name = "Nguyen Van A", Phone = "0123456789", Address = "Ha Noi" },
-                new Customer { CustomerId = "2", Name = "Nguyen Van B", Phone = "0123456789", Address = "Ha Noi" },
-                new Customer { CustomerId = "3", Name = "Nguyen Van C", Phone = "0123456789", Address = "Ha Noi" }
+                new Customer { CustomerId = "1", FullName = "Nguyen Van A", Phone = "0123456789", Address = "Ha Noi" },
+                new Customer { CustomerId = "2", FullName = "Nguyen Van B", Phone = "0123456789", Address = "Ha Noi" },
+                new Customer { CustomerId = "3", FullName = "Nguyen Van C", Phone = "0123456789", Address = "Ha Noi" }
             );
 
             modelBuilder.Entity<JewelryType>().HasData(

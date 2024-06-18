@@ -4,7 +4,6 @@ using BusinessObjects.DTO.BillReqRes;
 using BusinessObjects.Models;
 using Repositories.Implementation;
 using Repositories.Interface;
-using Repositories.Interface.GenericRepository;
 using Services.Interface;
 using Tools;
 
@@ -123,7 +122,7 @@ namespace Services.Implementation
             var billResponseDto = new BillResponseDto
             {
                 BillId = billId,
-                CustomerName = CustomerRepository.GetById(billRequestDto.CustomerId).Result?.Name,
+                CustomerName = CustomerRepository.GetById(billRequestDto.CustomerId).Result?.FullName,
                 StaffName = UserRepository.GetById(billRequestDto.UserId).Result?.Username,
                 TotalAmount = totalAmount,
                 TotalDiscount = totalDiscountRate,
