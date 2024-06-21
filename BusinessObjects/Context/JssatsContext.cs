@@ -20,9 +20,8 @@ namespace BusinessObjects.Context
             {
                 //optionsBuilder.UseSqlServer(GetConnectionString());
                 //optionsBuilder.UseNpgsql(GetConnectionString());
-                optionsBuilder.UseSqlServer("Server=(local);Uid=sa;Pwd=Abcd1234;Database=JSSATS;TrustServerCertificate=True");
-                //optionsBuilder.UseNpgsql("Host=aws-0-ap-southeast-1.pooler.supabase.com; Database=postgres; Username=postgres.gfjsnspjzlcfdrzxxksm; Password=Akaka0406+++");
-
+                //optionsBuilder.UseSqlServer("Server=(local);Uid=sa;Pwd=Abcd1234;Database=JSSATS;TrustServerCertificate=True");
+                optionsBuilder.UseNpgsql("Host=aws-0-ap-southeast-1.pooler.supabase.com; Database=postgres; Username=postgres.gfjsnspjzlcfdrzxxksm; Password=Akaka0406+++");
             }
         }
 
@@ -47,7 +46,7 @@ namespace BusinessObjects.Context
         public DbSet<Bill> Bills { get; set; }
         public DbSet<BillJewelry> BillJewelries { get; set; }
         public DbSet<BillPromotion> BillPromotions { get; set; }
-        
+
         public DbSet<Counter> Counters { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Jewelry> Jewelries { get; set; }
@@ -58,9 +57,10 @@ namespace BusinessObjects.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Warranty> Warranties { get; set; }
         public DbSet<JewelryMaterial> JewelryMaterials { get; set; }
-        
+
         public DbSet<Gold> Golds { get; set; }
         public DbSet<Gem> Gems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -113,7 +113,7 @@ namespace BusinessObjects.Context
             modelBuilder.Entity<Jewelry>()
                 .Property(j => j.JewelryId)
                 .HasColumnType("varchar(20)");
-            
+
             modelBuilder.Entity<JewelryType>()
                 .HasKey(jt => jt.JewelryTypeId);
 
@@ -155,7 +155,7 @@ namespace BusinessObjects.Context
             modelBuilder.Entity<Warranty>()
                 .Property(w => w.WarrantyId)
                 .HasColumnType("varchar(20)");
-            
+
 
             modelBuilder.Entity<Gem>()
                 .HasKey(sp => sp.GemId);
@@ -314,13 +314,15 @@ namespace BusinessObjects.Context
             modelBuilder.Entity<JewelryMaterial>().HasData(
                 new JewelryMaterial
                 {
-                    JewelryMaterialId = "1", JewelryId = "1", GoldQuantity = 30, GoldPriceId = "1", StoneQuantity = 1,StonePriceId = "1"
+                    JewelryMaterialId = "1", JewelryId = "1", GoldQuantity = 30, GoldPriceId = "1", StoneQuantity = 1,
+                    StonePriceId = "1"
                 },
                 new JewelryMaterial
                 {
-                    JewelryMaterialId = "2", JewelryId = "2", GoldQuantity = 20, GoldPriceId = "2", StoneQuantity = 1,StonePriceId = "2"
+                    JewelryMaterialId = "2", JewelryId = "2", GoldQuantity = 20, GoldPriceId = "2", StoneQuantity = 1,
+                    StonePriceId = "2"
                 }
-                );
+            );
             modelBuilder.Entity<Promotion>().HasData(
                 new Promotion
                 {

@@ -3,6 +3,7 @@ using BusinessObjects.Models;
 using Management.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace API.Controllers;
 
@@ -11,11 +12,12 @@ namespace API.Controllers;
 public class UserController(IUserManagement userManagement) : ControllerBase
 {
     private IUserManagement UserManagement { get; } = userManagement;
+    [EnableQuery]
     [HttpGet("GetUsers")]
     public async Task<IActionResult> Get()
     {
         var users = await UserManagement.GetUsers();
-        return Ok(users);
+        return Ok(users.AsQueryable());
     }
     [HttpGet("GetUserById/{id}")]
     public async Task<IActionResult> GetUserById(string id)
