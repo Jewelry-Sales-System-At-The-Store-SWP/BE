@@ -23,6 +23,18 @@ namespace DAO
                 .ToListAsync();
             return (totalRecord,totalPage, jewelries);
         }
+        
+        public async Task<(int,int,IEnumerable<Jewelry>)> GetJewelriesByType(string jewelryTypeId, int pageNumber, int pageSize)
+        {
+            var totalRecord = await _context.Jewelries.Where(x => x.JewelryTypeId  == jewelryTypeId).CountAsync();
+            var totalPage = (int)Math.Ceiling((double)totalRecord / pageSize);
+            var jewelries = await _context.Jewelries
+                .Where(x => x.JewelryTypeId == jewelryTypeId)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            return (totalRecord,totalPage, jewelries);
+        }
 
 
         public async Task<Jewelry?> GetJewelryById(string id)
@@ -33,7 +45,7 @@ namespace DAO
 
         public async Task<int> CreateJewelry(Jewelry jewelry)
         {
-            jewelry.JewelryId = IdGenerator.GenerateId();
+            jewelry.JewelryId = Generator.GenerateId();
             _context.Jewelries.Add(jewelry);
             return await _context.SaveChangesAsync();
         }

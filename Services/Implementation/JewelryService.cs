@@ -35,13 +35,26 @@ namespace Services.Implementation
             return jewelryResponseDto;
         }
 
+        public async Task<PagingResponse?> GetJewelryByType(string jewelryTypeId, int pageNumBer, int pageSize)
+        {
+            var jewelries = await JewelryRepository.GetsJewelryPagingByType(jewelryTypeId, pageNumBer, pageSize);
+            var jewelryPaging = new PagingResponse
+            {
+                PageNumber = pageNumBer,
+                PageSize = pageSize,
+                TotalRecord = jewelries.Item1,
+                TotalPage = jewelries.Item2,
+                Data = jewelries.Item3
+            };
+            return jewelryPaging;
+        }
 
         public async Task<int> CreateJewelry(JewelryRequestDto jewelryRequestDto)
         {
             // Create Jewelry first before creating JewelryMaterial
             var jewelry = new Jewelry
             {
-                JewelryId = IdGenerator.GenerateId(),
+                JewelryId = Generator.GenerateId(),
                 JewelryTypeId = jewelryRequestDto.JewelryTypeId,
                 Name = jewelryRequestDto.Name,
                 Barcode = jewelryRequestDto.Barcode,
@@ -56,10 +69,11 @@ namespace Services.Implementation
             {
                 throw new CustomException.InvalidDataException("Failed to create Jewelry.");
             }
+
             // Create JewelryMaterial
             var jewelryMaterial = new JewelryMaterial
             {
-                JewelryMaterialId = IdGenerator.GenerateId(),
+                JewelryMaterialId = Generator.GenerateId(),
                 JewelryId = jewelry.JewelryId,
                 GoldPriceId = jewelryRequestDto.JewelryMaterial.GoldId,
                 StonePriceId = jewelryRequestDto.JewelryMaterial.GemId,

@@ -41,11 +41,11 @@ public static class ServiceExtensions
         serviceCollection.AddScoped<IBillJewelryRepository, BillJewelryRepository>();
         serviceCollection.AddScoped<IBillDetailRepository, BillDetailRepository>();
         serviceCollection.AddScoped<IJewelryMaterialRepository, JewelryMaterialRepository>();
-
+        serviceCollection.AddScoped<ICounterRepository, CounterRepository>();
         #endregion
         
         #region Service
-
+        serviceCollection.AddScoped<IPaymentService, PaymentService>();
         serviceCollection.AddScoped<IGemPriceService, GemPriceService>();
         serviceCollection.AddScoped<IGoldPriceService, GoldPriceService>();
         serviceCollection.AddScoped<IRoleService, RoleService>();
@@ -61,7 +61,7 @@ public static class ServiceExtensions
         #endregion
         
         #region Dao
-
+        serviceCollection.AddScoped<CounterDao>();
         serviceCollection.AddScoped<BillDao>();
         serviceCollection.AddScoped<BillJewelryDao>();
         serviceCollection.AddScoped<BillPromotionDao>();
@@ -93,6 +93,7 @@ public static class ServiceExtensions
             opt.Select().Filter().OrderBy().Expand().Count().SetMaxTop(100).AddRouteComponents("odata", GetEdmModel());
         });
         #endregion
+        
         
         return serviceCollection;
     }
