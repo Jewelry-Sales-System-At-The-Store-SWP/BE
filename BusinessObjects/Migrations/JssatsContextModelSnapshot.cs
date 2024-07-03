@@ -25,13 +25,12 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.Bill", b =>
                 {
                     b.Property<string>("BillId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("CounterId")
                         .IsRequired()
                         .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -39,7 +38,7 @@ namespace BusinessObjects.Migrations
                     b.Property<string>("CustomerId")
                         .IsRequired()
                         .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<bool>("IsPaid")
                         .HasColumnType("boolean");
@@ -56,7 +55,7 @@ namespace BusinessObjects.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("BillId");
 
@@ -76,7 +75,7 @@ namespace BusinessObjects.Migrations
                             CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CustomerId = "1",
                             IsPaid = false,
-                            SaleDate = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2090), new TimeSpan(0, 7, 0, 0, 0)),
+                            SaleDate = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9896), new TimeSpan(0, 7, 0, 0, 0)),
                             TotalAmount = 500.0,
                             UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserId = "1"
@@ -88,7 +87,7 @@ namespace BusinessObjects.Migrations
                             CreatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CustomerId = "2",
                             IsPaid = false,
-                            SaleDate = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2092), new TimeSpan(0, 7, 0, 0, 0)),
+                            SaleDate = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9898), new TimeSpan(0, 7, 0, 0, 0)),
                             TotalAmount = 1200.0,
                             UpdatedAt = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             UserId = "2"
@@ -98,19 +97,16 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.BillJewelry", b =>
                 {
                     b.Property<string>("BillJewelryId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("BillId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("JewelryId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -145,19 +141,16 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.BillPromotion", b =>
                 {
                     b.Property<string>("BillPromotionId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("BillId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("PromotionId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -192,8 +185,7 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.Counter", b =>
                 {
                     b.Property<string>("CounterId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -235,31 +227,25 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.Customer", b =>
                 {
                     b.Property<string>("CustomerId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Address")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<string>("FullName")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Gender")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Phone")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<int?>("Point")
                         .HasColumnType("integer");
@@ -268,8 +254,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserName")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.HasKey("CustomerId");
 
@@ -308,15 +293,13 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.Gem", b =>
                 {
                     b.Property<string>("GemId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<float>("BuyPrice")
                         .HasColumnType("real");
 
                     b.Property<string>("City")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("LastUpdated")
                         .HasColumnType("timestamp with time zone");
@@ -325,8 +308,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("Type")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.HasKey("GemId");
 
@@ -338,7 +320,7 @@ namespace BusinessObjects.Migrations
                             GemId = "1",
                             BuyPrice = 300f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2145), new TimeSpan(0, 7, 0, 0, 0)),
+                            LastUpdated = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9950), new TimeSpan(0, 7, 0, 0, 0)),
                             SellPrice = 400f,
                             Type = "Ruby"
                         },
@@ -347,7 +329,7 @@ namespace BusinessObjects.Migrations
                             GemId = "2",
                             BuyPrice = 400f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2153), new TimeSpan(0, 7, 0, 0, 0)),
+                            LastUpdated = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9952), new TimeSpan(0, 7, 0, 0, 0)),
                             SellPrice = 500f,
                             Type = "Sapphire"
                         },
@@ -356,7 +338,7 @@ namespace BusinessObjects.Migrations
                             GemId = "3",
                             BuyPrice = 500f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2155), new TimeSpan(0, 7, 0, 0, 0)),
+                            LastUpdated = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9954), new TimeSpan(0, 7, 0, 0, 0)),
                             SellPrice = 600f,
                             Type = "Emerald"
                         });
@@ -365,15 +347,13 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.Gold", b =>
                 {
                     b.Property<string>("GoldId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<float>("BuyPrice")
                         .HasColumnType("real");
 
                     b.Property<string>("City")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset?>("LastUpdated")
                         .HasColumnType("timestamp with time zone");
@@ -382,8 +362,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("Type")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.HasKey("GoldId");
 
@@ -395,7 +374,7 @@ namespace BusinessObjects.Migrations
                             GoldId = "1",
                             BuyPrice = 1000f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2176), new TimeSpan(0, 7, 0, 0, 0)),
+                            LastUpdated = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9974), new TimeSpan(0, 7, 0, 0, 0)),
                             SellPrice = 1200f,
                             Type = "9999"
                         },
@@ -404,7 +383,7 @@ namespace BusinessObjects.Migrations
                             GoldId = "2",
                             BuyPrice = 1200f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2179), new TimeSpan(0, 7, 0, 0, 0)),
+                            LastUpdated = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9976), new TimeSpan(0, 7, 0, 0, 0)),
                             SellPrice = 1400f,
                             Type = "SCJ"
                         },
@@ -413,7 +392,7 @@ namespace BusinessObjects.Migrations
                             GoldId = "3",
                             BuyPrice = 1400f,
                             City = "Ha Noi",
-                            LastUpdated = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2180), new TimeSpan(0, 7, 0, 0, 0)),
+                            LastUpdated = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9978), new TimeSpan(0, 7, 0, 0, 0)),
                             SellPrice = 1600f,
                             Type = "18k"
                         });
@@ -422,33 +401,28 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.Jewelry", b =>
                 {
                     b.Property<string>("JewelryId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Barcode")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ImageUrl")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<bool?>("IsSold")
                         .HasColumnType("boolean");
 
                     b.Property<string>("JewelryTypeId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<double?>("LaborCost")
                         .HasColumnType("double precision");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -487,26 +461,22 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.JewelryMaterial", b =>
                 {
                     b.Property<string>("JewelryMaterialId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("GoldPriceId")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<float>("GoldQuantity")
                         .HasColumnType("real");
 
                     b.Property<string>("JewelryId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("StonePriceId")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<float>("StoneQuantity")
                         .HasColumnType("real");
@@ -552,12 +522,10 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.JewelryType", b =>
                 {
                     b.Property<string>("JewelryTypeId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.HasKey("JewelryTypeId");
 
@@ -584,16 +552,13 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.Promotion", b =>
                 {
                     b.Property<string>("PromotionId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("ApproveManager")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<double?>("DiscountRate")
                         .HasColumnType("double precision");
@@ -605,8 +570,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Type")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.HasKey("PromotionId");
 
@@ -618,8 +582,8 @@ namespace BusinessObjects.Migrations
                             PromotionId = "1",
                             Description = "Giam gia 10%",
                             DiscountRate = 1.0,
-                            EndDate = new DateTimeOffset(new DateTime(2024, 7, 13, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2057), new TimeSpan(0, 7, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2029), new TimeSpan(0, 7, 0, 0, 0)),
+                            EndDate = new DateTimeOffset(new DateTime(2024, 7, 12, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9866), new TimeSpan(0, 7, 0, 0, 0)),
+                            StartDate = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9835), new TimeSpan(0, 7, 0, 0, 0)),
                             Type = "Giam gia"
                         },
                         new
@@ -627,8 +591,8 @@ namespace BusinessObjects.Migrations
                             PromotionId = "2",
                             Description = "Giam gia 20%",
                             DiscountRate = 2.0,
-                            EndDate = new DateTimeOffset(new DateTime(2024, 7, 13, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2064), new TimeSpan(0, 7, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2063), new TimeSpan(0, 7, 0, 0, 0)),
+                            EndDate = new DateTimeOffset(new DateTime(2024, 7, 12, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9873), new TimeSpan(0, 7, 0, 0, 0)),
+                            StartDate = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9872), new TimeSpan(0, 7, 0, 0, 0)),
                             Type = "Giam gia"
                         },
                         new
@@ -636,8 +600,8 @@ namespace BusinessObjects.Migrations
                             PromotionId = "3",
                             Description = "Giam gia 30%",
                             DiscountRate = 3.0,
-                            EndDate = new DateTimeOffset(new DateTime(2024, 7, 13, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2067), new TimeSpan(0, 7, 0, 0, 0)),
-                            StartDate = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2066), new TimeSpan(0, 7, 0, 0, 0)),
+                            EndDate = new DateTimeOffset(new DateTime(2024, 7, 12, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9875), new TimeSpan(0, 7, 0, 0, 0)),
+                            StartDate = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9875), new TimeSpan(0, 7, 0, 0, 0)),
                             Type = "Giam gia"
                         });
                 });
@@ -645,19 +609,16 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.Purchase", b =>
                 {
                     b.Property<string>("PurchaseId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("CustomerId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<int?>("IsBuyBack")
                         .HasColumnType("integer");
 
                     b.Property<string>("JewelryId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTimeOffset?>("PurchaseDate")
                         .HasColumnType("timestamp with time zone");
@@ -666,8 +627,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("UserId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("PurchaseId");
 
@@ -686,7 +646,7 @@ namespace BusinessObjects.Migrations
                             CustomerId = "1",
                             IsBuyBack = 0,
                             JewelryId = "1",
-                            PurchaseDate = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2200), new TimeSpan(0, 7, 0, 0, 0)),
+                            PurchaseDate = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 653, DateTimeKind.Unspecified).AddTicks(9998), new TimeSpan(0, 7, 0, 0, 0)),
                             PurchasePrice = 500.0,
                             UserId = "1"
                         },
@@ -696,7 +656,7 @@ namespace BusinessObjects.Migrations
                             CustomerId = "2",
                             IsBuyBack = 1,
                             JewelryId = "2",
-                            PurchaseDate = new DateTimeOffset(new DateTime(2024, 7, 3, 9, 14, 48, 253, DateTimeKind.Unspecified).AddTicks(2202), new TimeSpan(0, 7, 0, 0, 0)),
+                            PurchaseDate = new DateTimeOffset(new DateTime(2024, 7, 2, 13, 47, 50, 654, DateTimeKind.Unspecified), new TimeSpan(0, 7, 0, 0, 0)),
                             PurchasePrice = 300.0,
                             UserId = "1"
                         });
@@ -705,12 +665,10 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.Role", b =>
                 {
                     b.Property<string>("RoleId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("RoleName")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.HasKey("RoleId");
 
@@ -737,39 +695,31 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.User", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("CounterId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTimeOffset?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<string>("FullName")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Gender")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Password")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<string>("RoleId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("boolean");
@@ -778,8 +728,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Username")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId");
 
@@ -825,19 +774,16 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Models.Warranty", b =>
                 {
                     b.Property<string>("WarrantyId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset?>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("JewelryId")
-                        .HasMaxLength(7)
-                        .HasColumnType("character varying(7)");
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("WarrantyId");
 

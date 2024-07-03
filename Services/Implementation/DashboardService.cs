@@ -1,6 +1,4 @@
-﻿using BusinessObjects.Dto.Dashboard;
-using BusinessObjects.Dto.Revenue;
-using BusinessObjects.Models;
+﻿using BusinessObjects.Dto.Revenue;
 using Repositories.Implementation;
 using Repositories.Interface;
 using Services.Interface;
@@ -15,14 +13,12 @@ namespace Services.Implementation
     public class DashboardService : IDashboardService
     {
         private readonly IBillRepository _billRepository;
-        private readonly IBillJewelryRepository _billJewelryRepository;
         private readonly ICustomerRepository _customerRepository;
 
-        public DashboardService(IBillRepository billRepository, ICustomerRepository customerRepository, IBillJewelryRepository billJewelryRepository)
+        public DashboardService(IBillRepository billRepository, ICustomerRepository customerRepository)
         {
             _billRepository = billRepository;
             _customerRepository = customerRepository;
-            _billJewelryRepository = billJewelryRepository;
         }
         public async Task<RevenueDto> GetTotalRevenueAllTime()
         {
@@ -69,26 +65,6 @@ namespace Services.Implementation
         public async Task<int> GetActiveCustomers(DateTime startDate, DateTime endDate)
         {
             return await _customerRepository.GetActiveCustomers(startDate, endDate);
-        }
-
-        public async Task<IEnumerable<BestSellingProductDto>> GetBestSellingProducts()
-        {
-            return await _billJewelryRepository.GetBestSellingProducts();
-        }
-
-        public async Task<IEnumerable<BestSellingProductTypeDto>> GetBestSellingProductTypes()
-        {
-            return await _billJewelryRepository.GetBestSellingProductTypes();
-        }
-
-        public async Task<IEnumerable<ProductRevenueDto>> GetTotalRevenueByProducts()
-        {
-            return await _billJewelryRepository.GetTotalRevenueByProducts();
-        }
-
-        public async Task<IEnumerable<ProductTypeRevenueDto>> GetTotalRevenueByProductTypes()
-        {
-            return await _billJewelryRepository.GetTotalRevenueByProductTypes();
         }
     }
 }

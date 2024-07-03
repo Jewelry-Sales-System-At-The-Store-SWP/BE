@@ -36,7 +36,7 @@ public class BillController(IUserManagement userManagement, IPaymentService paym
         return Ok(await PaymentService.CheckoutBill(id));
     }
 
-    [HttpPost("CheckoutOffline/{id}")]
+    [HttpGet("CheckoutOffline/{id}")]
     public async Task<IActionResult> CheckoutOffline(string id, float cashAmount)
     {
         return Ok(await UserManagement.CheckoutBill(id,cashAmount));

@@ -1,6 +1,4 @@
-﻿using BusinessObjects.Dto.Dashboard;
-using BusinessObjects.Dto.Revenue;
-using BusinessObjects.Models;
+﻿using BusinessObjects.Dto.Revenue;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +18,5 @@ namespace Services.Interface
         Task<int> GetNewCustomers(DateTime startDate, DateTime endDate);
         Task<int> GetRepeatCustomers();
         Task<int> GetActiveCustomers(DateTime startDate, DateTime endDate);
-        Task<IEnumerable<BestSellingProductDto>> GetBestSellingProducts();
-        Task<IEnumerable<BestSellingProductTypeDto>> GetBestSellingProductTypes();
-        Task<IEnumerable<ProductRevenueDto>> GetTotalRevenueByProducts();
-        Task<IEnumerable<ProductTypeRevenueDto>> GetTotalRevenueByProductTypes();
     }
 }
