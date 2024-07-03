@@ -1,5 +1,7 @@
-﻿using BusinessObjects.Models;
-using DAO;
+﻿using BusinessObjects.Dto;
+using BusinessObjects.Models;
+using DAO.Dao;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Interface;
 
 namespace Repositories.Implementation
@@ -7,6 +9,7 @@ namespace Repositories.Implementation
     public class CustomerRepository(CustomerDao customerDao) : ICustomerRepository
     {
         private CustomerDao CustomerDao { get; } = customerDao;
+
 
         public async Task<Customer> CreateCustomer(Customer entity)
         {
@@ -48,6 +51,36 @@ namespace Repositories.Implementation
         public Task<int> Create(Customer entity)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<int> GetTotalCustomers()
+        {
+            return await CustomerDao.GetAllCustomers().CountAsync();
+        }
+
+        public async Task<int> GetNewCustomers(DateTime startDate, DateTime endDate)
+        {
+            var utcStartDate = startDate.ToUniversalTime();
+            var utcEndDate = endDate.ToUniversalTime();
+
+            return await CustomerDao.GetAllCustomers()
+                                     .Where(c => c.CreatedAt >= utcStartDate && c.CreatedAt <= utcEndDate)
+                                     .CountAsync();
+        }
+
+        public async Task<int> GetRepeatCustomers()
+        {
+            return await CustomerDao.GetAllCustomers()
+                                     .CountAsync(c => c.Bills.Count() > 1);
+        }
+
+        public async Task<int> GetActiveCustomers(DateTime startDate, DateTime endDate)
+        {
+            var utcStartDate = startDate.ToUniversalTime();
+            var utcEndDate = endDate.ToUniversalTime();
+
+            return await CustomerDao.GetAllCustomers()
+                                     .CountAsync(c => c.Bills.Any(b => b.SaleDate >= utcStartDate && b.SaleDate <= utcEndDate));
         }
     }
 }

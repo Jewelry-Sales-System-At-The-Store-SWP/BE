@@ -1,10 +1,9 @@
 ﻿using BusinessObjects.Context;
 using BusinessObjects.Models;
-using DAO.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Tools;
 
-namespace DAO
+namespace DAO.Dao
 {
     public class BillDao
     {
@@ -12,6 +11,11 @@ namespace DAO
         public async Task<IEnumerable<Bill>> GetBills()
         {
             return await _context.Bills.ToListAsync();
+        }
+
+        public IQueryable<Bill> GetAllBills()
+        {
+            return _context.Bills.AsQueryable();
         }
 
         public async Task<Bill?> GetBillById(string id)
