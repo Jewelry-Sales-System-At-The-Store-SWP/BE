@@ -5,7 +5,7 @@ public class JewelryRequestDto
     public required string JewelryTypeId { get; set; }
     
     public required string Name { get; set; }
-    public string ImageUrl { get; set; }
+    public string? ImageUrl { get; set; }
     
     public JewelryMaterialRequestDto? JewelryMaterial { get; set; }
 
