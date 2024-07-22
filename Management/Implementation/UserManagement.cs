@@ -1,5 +1,6 @@
 ﻿using BusinessObjects.Dto;
 using BusinessObjects.Dto.BillReqRes;
+using BusinessObjects.Dto.Counter;
 using BusinessObjects.Dto.Other;
 using BusinessObjects.Dto.ResponseDto;
 using BusinessObjects.Models;
@@ -21,6 +22,12 @@ namespace Management.Implementation
             if (user == null) return null;
             var token = await TokenService.CreateToken(user);
             return token;
+        }
+
+        public async Task<int?> Logout(string id)
+        {
+            var result = await UserService.Logout(id);
+            return 1;
         }
 
         public async Task<BillCashCheckoutResponseDto> CheckoutBill(string id, float cashAmount)

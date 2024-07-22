@@ -1,16 +1,20 @@
 ﻿using BusinessObjects.Dto;
+using BusinessObjects.Dto.Counter;
+using BusinessObjects.Models;
 using Management.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Services.Interface;
 
 namespace API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UserController(IUserManagement userManagement) : ControllerBase
+public class UserController(IUserManagement userManagement, IUserService userService) : ControllerBase
 {
     private IUserManagement UserManagement { get; } = userManagement;
+    private IUserService UserService { get; } = userService;
     [EnableQuery]
     [HttpGet("GetUsers")]
     public async Task<IActionResult> Get()
@@ -33,6 +37,13 @@ public class UserController(IUserManagement userManagement) : ControllerBase
         if (token != null) return Ok(token);
         return NotFound(new { message = "Login fail" });
     }
+    
+    [HttpPost("Logout")]
+    public async Task<IActionResult> Logout(string userId)
+    {
+        var logoutCounter = await UserManagement.Logout(userId);
+        return Ok(logoutCounter);
+    }
     [HttpPost("AddUser")]
     public async Task<IActionResult> AddUser(UserDto userDto)
     {
@@ -46,6 +57,13 @@ public class UserController(IUserManagement userManagement) : ControllerBase
         var result = await UserManagement.UpdateUser(id, userDto);
         if (result > 0) return Ok(new { message = "Update user success" });
         return BadRequest(new { message = "Update user fail" });
+    }
+    [HttpPut("UpdateCounterByUserId/{userId}/{counterId}")]
+    public async Task<IActionResult> UpdateCounterByUserId(string userId, string counterId)
+    {
+        var result = await UserService.UpdateCounterByUserId(userId, counterId);
+        if (result) return Ok(new { message = "Update counter success" });
+        return BadRequest(new { message = "Update counter fail" });
     }
     [HttpDelete("DeleteUser/{id}")]
     public async Task<IActionResult> DeleteUser(string id)
