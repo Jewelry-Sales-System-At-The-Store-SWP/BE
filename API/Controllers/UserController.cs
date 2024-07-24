@@ -15,13 +15,17 @@ public class UserController(IUserManagement userManagement, IUserService userSer
 {
     private IUserManagement UserManagement { get; } = userManagement;
     private IUserService UserService { get; } = userService;
+
     [EnableQuery]
+    [Authorize(Roles = "Admin, Staff, Manager")]
     [HttpGet("GetUsers")]
     public async Task<IActionResult> Get()
     {
         var users = await UserManagement.GetUsers();
         return Ok(users);
     }
+
+    [Authorize(Roles = "Admin, Staff, Manager")]
     [HttpGet("GetUserById/{id}")]
     public async Task<IActionResult> GetUserById(string id)
     {
@@ -29,6 +33,7 @@ public class UserController(IUserManagement userManagement, IUserService userSer
         if (user != null) return Ok(user);
         return NotFound(new { message = "User not found" });
     }
+
     [AllowAnonymous]
     [HttpPost("Login")]
     public async Task<IActionResult> Login(LoginDto loginDto)
@@ -37,13 +42,24 @@ public class UserController(IUserManagement userManagement, IUserService userSer
         if (token != null) return Ok(token);
         return NotFound(new { message = "Login fail" });
     }
-    
+
+    [AllowAnonymous]
+    [HttpPost("CustomerLogin")]
+    public async Task<IActionResult> CustomerLogin(CustomerLoginDto customerLoginDto)
+    {
+        var result = await userManagement.CustomerLogin(customerLoginDto);
+        if (result == null) return Unauthorized();
+        return Ok(result);
+    }
+    [AllowAnonymous]
     [HttpPost("Logout")]
     public async Task<IActionResult> Logout(string userId)
     {
         var logoutCounter = await UserManagement.Logout(userId);
         return Ok(logoutCounter);
     }
+
+    [Authorize(Roles = "Admin, Manager")]
     [HttpPost("AddUser")]
     public async Task<IActionResult> AddUser(UserDto userDto)
     {
@@ -51,6 +67,8 @@ public class UserController(IUserManagement userManagement, IUserService userSer
         if (result > 0) return Ok(new { message = "Add user success" });
         return BadRequest(new { message = "Add user fail" });
     }
+
+    [Authorize(Roles = "Admin, Manager")]
     [HttpPut("UpdateUser/{id}")]
     public async Task<IActionResult> UpdateUser(string id, UserDto userDto)
     {
@@ -58,6 +76,8 @@ public class UserController(IUserManagement userManagement, IUserService userSer
         if (result > 0) return Ok(new { message = "Update user success" });
         return BadRequest(new { message = "Update user fail" });
     }
+
+    [Authorize(Roles = "Admin, Manager")]
     [HttpPut("UpdateCounterByUserId/{userId}/{counterId}")]
     public async Task<IActionResult> UpdateCounterByUserId(string userId, string counterId)
     {
@@ -65,6 +85,8 @@ public class UserController(IUserManagement userManagement, IUserService userSer
         if (result) return Ok(new { message = "Update counter success" });
         return BadRequest(new { message = "Update counter fail" });
     }
+
+    [Authorize(Roles = "Admin")]
     [HttpDelete("DeleteUser/{id}")]
     public async Task<IActionResult> DeleteUser(string id)
     {
