@@ -68,6 +68,7 @@ public class BillController(IUserManagement userManagement, IPaymentService paym
         await paymentService.UpdatePaymentStatus(orderCode, PaymentStatus.Success);
         await paymentService.UpdateBillStatus(billId);
         await paymentService.UpdateJewelryStatus(billId);
+        await PaymentService.CreatePurchase(billId);
         return Redirect($"{returnUrl}/status=success");
     }
 }

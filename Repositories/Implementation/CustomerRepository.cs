@@ -87,5 +87,10 @@ namespace Repositories.Implementation
             return await CustomerDao.GetAllCustomers()
                                      .CountAsync(c => c.Bills.Any(b => b.SaleDate >= utcStartDate && b.SaleDate <= utcEndDate));
         }
+
+        public async Task<string> GetCustomerIdByName(string name)
+        {
+            return await CustomerDao.GetCustomerIdByName(name);
+        }
     }
 }

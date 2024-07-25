@@ -88,5 +88,10 @@ namespace DAO.Dao
             _context.Customers.Add(customer);
             return await _context.SaveChangesAsync() > 0;
         }
+        public async Task<string> GetCustomerIdByName(string name)
+        {
+            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.FullName == name);
+            return customer?.CustomerId;
+        }
     }
 }
