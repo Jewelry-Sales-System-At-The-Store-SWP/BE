@@ -1,4 +1,4 @@
-name: Build Test
+name: Jewelry Sales System At The Store (CI / CD applied).
 
 on:
   push:
