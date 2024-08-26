@@ -1,2 +1,1 @@
 Status: [![Build Test](https://github.com/Jewelry-Sales-System-At-The-Store-SWP/BE/actions/workflows/main.yml/badge.svg)](https://github.com/Jewelry-Sales-System-At-The-Store-SWP/BE/actions/workflows/main.yml)
-[![Jewelry Sales System At The Store (CI / CD applied).](https://github.com/Jewelry-Sales-System-At-The-Store-SWP/BE/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/Jewelry-Sales-System-At-The-Store-SWP/BE/actions/workflows/main.yml)
